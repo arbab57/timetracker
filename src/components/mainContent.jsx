@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "./navigation";
 import AddEntry from "./addEntry";
 import ContainerEntries from "./containerEntries";
 
-const mainContent = ({ isSideOpen, setIsSideOpen }) => {
+const mainContent = ({ isSideOpen, setIsSideOpen, isMobile, setIsMobile }) => {
   return (
     <div className="flex">
-      <Navigation isSideOpen={isSideOpen} setIsSideOpen={setIsSideOpen} />
+      <span
+        id="checker"
+        className="fixed top-0 left-0 opacity-0 md:text-xs text-sm"
+      >
+        f
+      </span>
+      <Navigation
+        isSideOpen={isSideOpen}
+        setIsSideOpen={setIsSideOpen}
+        isMobile={isMobile}
+        setIsMobile={setIsMobile}
+      />
       <ContainerEntries />
     </div>
   );

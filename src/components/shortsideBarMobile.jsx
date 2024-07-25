@@ -13,14 +13,14 @@ import {
 
 const ShortSideBar = ({ setIsSideOpen }) => {
   return (
-    <div className="h-screen sticky top-0">
+    <div className="h-screen w-0 sticky top-0">
       <div className="h-16"></div>
-      <nav className="shadow-md border-r border-gray-300 w-16 h-screen sticky top-16 bg-white z-10">
+      <nav className="shadow-md border-r border-gray-300 h-screen sticky top-16 bg-white z-10">
         <div
           onClick={() => {
             setIsSideOpen((prev) => !prev);
           }}
-          className="w-6 h-6 text-sm bg-white absolute -right-4 top-72 input-entry flex  justify-center items-center cursor-pointer"
+          className="w-6 h-6 text-sm bg-white absolute -right-5 top-72 input-entry flex  justify-center items-center cursor-pointer"
         >
           <FaChevronRight />
         </div>

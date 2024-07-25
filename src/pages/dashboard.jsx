@@ -8,14 +8,23 @@ import Loading from "./loading";
 import MainContent from "../components/mainContent";
 
 const dashboard = () => {
-  const [isSideOpen, setIsSideOpen] = useState(true);
+  let width = window.innerWidth;
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth > 700 ? false : true
+  );
+  const [isSideOpen, setIsSideOpen] = useState(
+    window.innerWidth > 700 ? true : false
+  );
+
   return (
     <>
       <Header />
-      <MainContent isSideOpen={isSideOpen} setIsSideOpen={setIsSideOpen} />
-      {/* <Navigation isSideOpen={isSideOpen} setIsSideOpen={setIsSideOpen} />
-      <AddEntry isSideOpen={isSideOpen} />
-      <ContainerEntries isSideOpen={isSideOpen} /> */}
+      <MainContent
+        isSideOpen={isSideOpen}
+        setIsSideOpen={setIsSideOpen}
+        isMobile={isMobile}
+        setIsMobile={setIsMobile}
+      />
       {/* <Loading /> */}
     </>
   );
