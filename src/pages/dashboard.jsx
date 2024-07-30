@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import Header from "../components/header";
-import Sidebar from "../components/sidebar";
-import AddEntry from "../components/addEntry";
-import ContainerEntries from "../components/containerEntries";
-import Navigation from "../components/navigation";
-import Loading from "./loading";
 import MainContent from "../components/mainContent";
 
 const dashboard = () => {
-  let width = window.innerWidth;
   const [isMobile, setIsMobile] = useState(
     window.innerWidth > 700 ? false : true
   );
   const [isSideOpen, setIsSideOpen] = useState(
     window.innerWidth > 700 ? true : false
   );
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 800) {
+      setIsSideOpen(true);
+      setIsMobile(false);
+    } else {
+      setIsSideOpen(false);
+      setIsMobile(true);
+    }
+  });
 
   return (
     <>
@@ -25,7 +28,6 @@ const dashboard = () => {
         isMobile={isMobile}
         setIsMobile={setIsMobile}
       />
-      {/* <Loading /> */}
     </>
   );
 };

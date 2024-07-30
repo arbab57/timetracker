@@ -7,7 +7,7 @@ const containerEntries = ({ isSideOpen }) => {
   let x = isSideOpen ? "w-48 h-1" : "w-16 h-1";
   let x2 = isSideOpen
     ? "w-full px-9 flex flex-col gap-8"
-    : "w-full px-5 flex flex-col gap-8";
+    : "w-full sm:px-5 px-3 flex flex-col gap-8";
 
   let entries = [
     { date: 24, entries: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"] },
@@ -21,7 +21,7 @@ const containerEntries = ({ isSideOpen }) => {
       <AddEntry />
       <div className={x2}>
         {entries.map((item, index) => {
-          return <DateConEntry entry={item} />;
+          return <DateConEntry entry={item} key={index} />;
         })}
       </div>
       <div className=""></div>

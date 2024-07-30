@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import Navigation from "./navigation";
-import AddEntry from "./addEntry";
 import ContainerEntries from "./containerEntries";
 
 const mainContent = ({ isSideOpen, setIsSideOpen, isMobile, setIsMobile }) => {
