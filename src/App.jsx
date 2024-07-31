@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Dashboard from "./pages/dashboard";
+import Timetracker from "./pages/timetracker";
 import Login from "./pages/login";
 import "./App.css";
 
 function App() {
-  return <Dashboard />;
+  return <Timetracker />;
 }
 
 export default App;

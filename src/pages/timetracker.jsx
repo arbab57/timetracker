@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/header";
 import MainContent from "../components/mainContent";
 
-const dashboard = () => {
+const timetracker = () => {
   const [isMobile, setIsMobile] = useState(
     window.innerWidth > 700 ? false : true
   );
@@ -32,4 +32,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default timetracker;

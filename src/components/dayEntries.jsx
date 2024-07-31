@@ -1,7 +1,7 @@
 import React from "react";
 import Entry from "./entry";
 
-const dateConEntry = ({ entry }) => {
+const dayEntries = ({ entry }) => {
   return (
     <div className="border-b-4 border-gray-300 sm:border-x">
       <div className="flex justify-between items-center bg-gray-300 py-2 sm:px-7 px-3">
@@ -17,4 +17,4 @@ const dateConEntry = ({ entry }) => {
   );
 };
 
-export default dateConEntry;
+export default dayEntries;
