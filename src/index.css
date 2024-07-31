@@ -13,3 +13,7 @@ body {
 /* #root {
     height: 500vh;
 } */
+
+.h-70px {
+    height: 70px !important;
+}

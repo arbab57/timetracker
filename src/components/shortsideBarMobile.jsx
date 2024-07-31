@@ -14,7 +14,7 @@ import {
 const ShortSideBar = ({ setIsSideOpen }) => {
   return (
     <div className="h-screen w-0 sticky top-0 flex flex-col">
-      <div className="h-16"></div>
+      <div className="h-70px"></div>
       <nav className="shadow-md border-r border-gray-300 h-screen sticky top-16 bg-white z-10">
         <div
           onClick={() => {

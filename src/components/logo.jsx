@@ -1,16 +1,17 @@
 import React from "react";
 import { FaBars, FaClock, FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const logo = () => {
   return (
     <div className="flex sm:justify-start justify-between items-center sm:gap-7 gap-2 w-full">
-      <div className="flex items-center gap-2">
+      <Link to={"/"} className="flex items-center gap-2">
         <FaBars className="text-2xl" />
         <div className="flex items-center gap-1 ">
           <FaClock className="text-2xl text-blue-500" />
           <p className="font-bold text-2xl">ClockIt</p>
         </div>
-      </div>
+      </Link>
 
       <div className=" sm:flex hidden items-center h-10">
         <p className="font-medium text-gray-500">Arbabbashir30's workspace</p>
