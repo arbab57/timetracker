@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { FaClock } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const logSign = ({ link }) => {
   return (
@@ -15,19 +16,20 @@ const logSign = ({ link }) => {
           className="flex gap-3
         "
         >
-          <a
+          <Link
+            to={"/users/login"}
             className="font-bold text-blue-500 flex justify-between items-center"
-            href=""
           >
             Log In
-          </a>
+          </Link>
           <span>/</span>
-          <a
+          <Link
+            to={"/users/signup"}
             className="font-bold text-blue-500 flex justify-between items-center"
             href=""
           >
             Sign Up
-          </a>
+          </Link>
         </div>
       </header>
       <Outlet />

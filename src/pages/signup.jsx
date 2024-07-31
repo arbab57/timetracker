@@ -2,7 +2,14 @@ import React from "react";
 import InputForm from "../components/inputForm";
 
 const signup = () => {
-  return <InputForm form={"Sign Up"} />;
+  return (
+    <InputForm
+      form={"Sign Up"}
+      subHeading={
+        "Create a free account to start tracking time and supercharge your productivity."
+      }
+    />
+  );
 };
 
 export default signup;

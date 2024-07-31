@@ -11,6 +11,7 @@ import {
   FaChevronLeft,
 } from "react-icons/fa";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 const sidebar = ({ setIsSideOpen, isSideOpen }) => {
   return (
@@ -27,46 +28,70 @@ const sidebar = ({ setIsSideOpen, isSideOpen }) => {
           <FaChevronLeft />
         </div>
 
-        <div className="flex gap-2 items-center py-3 bg-gray-200 w-full cursor-pointer">
+        <Link
+          to={"/"}
+          className="flex gap-2 items-center py-4 bg-gray-200 w-full cursor-pointer"
+        >
           <FaClock className="text-gray-500 text-xl ml-5" />
           <p className="text-base">TIME TRACKER</p>
-        </div>
+        </Link>
 
-        <div className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer">
+        <Link
+          to={"/calender"}
+          className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer"
+        >
           <FaCalendar className="text-gray-500 text-xl ml-5" />
           <p className="text-base">CALENDER</p>
-        </div>
+        </Link>
 
         <p className="ml-5 my-4 text-gray-600">ANALYZE</p>
 
-        <div className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer">
+        <Link
+          to={"/dashboard"}
+          className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer"
+        >
           <FaCheckSquare className="text-gray-500 text-xl ml-5" />
           <p className="text-base">DASHBOARD</p>
-        </div>
+        </Link>
 
-        <div className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer">
+        <Link
+          to={"/reports"}
+          className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer"
+        >
           <FaBook className="text-gray-500 text-xl ml-5" />
           <p className="text-base">REPORTS</p>
-        </div>
+        </Link>
 
         <p className="ml-5 my-4 text-gray-600">MANAGE</p>
 
-        <div className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer">
+        <Link
+          to={"/projects"}
+          className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer"
+        >
           <FaProjectDiagram className="text-gray-500 text-xl ml-5" />
           <p className="text-base">PROJECTS</p>
-        </div>
-        <div className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer">
+        </Link>
+        <Link
+          to={"/tags"}
+          className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer"
+        >
           <FaTag className="text-gray-500 text-xl ml-5" />
           <p className="text-base">TAGS</p>
-        </div>
-        <div className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer">
+        </Link>
+        <Link
+          to={"/team"}
+          className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer"
+        >
           <FaUsers className="text-gray-500 text-xl ml-5" />
           <p className="text-base">TEAM</p>
-        </div>
-        <div className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer">
+        </Link>
+        <Link
+          to={"/clients"}
+          className="flex gap-2 items-center py-3 w-full hover:bg-gray-200 transition cursor-pointer"
+        >
           <FaUserAlt className="text-gray-500 text-xl ml-5" />
           <p className="text-base">CLIENTS</p>
-        </div>
+        </Link>
       </nav>
     </div>
   );

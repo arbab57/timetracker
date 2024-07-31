@@ -5,10 +5,7 @@ const inputForm = (props) => {
     <div className="flex flex-col gap-10 justify-center items-center h-screen ">
       <div className="text-center">
         <h2 className="text-5xl font-bold">Get Started with ClockIt</h2>
-        <p className="text-gray-400 text-lg mt-4">
-          Create a free account to start tracking time and supercharge your
-          productivity.
-        </p>
+        <p className="text-gray-400 text-lg mt-4">{props.subHeading}</p>
       </div>
 
       <div className="bg-white input-entry p-7 outline-none flex flex-col log-sign-con rounded-sm">
