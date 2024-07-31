@@ -1,7 +1,12 @@
 import Navigation from "./navigation";
-import ContainerEntries from "./containerEntries";
 
-const mainContent = ({ isSideOpen, setIsSideOpen, isMobile, setIsMobile }) => {
+const mainContent = ({
+  isSideOpen,
+  setIsSideOpen,
+  isMobile,
+  setIsMobile,
+  Outlet,
+}) => {
   return (
     <div className="flex">
       <span
@@ -16,7 +21,7 @@ const mainContent = ({ isSideOpen, setIsSideOpen, isMobile, setIsMobile }) => {
         isMobile={isMobile}
         setIsMobile={setIsMobile}
       />
-      <ContainerEntries />
+      <Outlet />
     </div>
   );
 };

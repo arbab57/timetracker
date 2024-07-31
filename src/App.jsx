@@ -1,10 +1,34 @@
-import { useState } from "react";
-import Timetracker from "./pages/timetracker";
-import Login from "./pages/login";
 import "./App.css";
+import {
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
+import MainLayout from "./layouts/mainLayout";
+import TimeTracker from "./pages/timetracker";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
+import LogSign from "./layouts/logSign";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<TimeTracker />} />
+      </Route>
+
+      <Route path="/users" element={<LogSign />}>
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
+      </Route>
+    </>
+  )
+);
 
 function App() {
-  return <Timetracker />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

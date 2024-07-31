@@ -1,35 +1,24 @@
 import React, { useState } from "react";
-import Header from "../components/header";
-import MainContent from "../components/mainContent";
+import ConAddEntry from "../components/conAddEntry";
+import Entries from "../components/entries";
 
-const timetracker = () => {
-  const [isMobile, setIsMobile] = useState(
-    window.innerWidth > 700 ? false : true
-  );
-  const [isSideOpen, setIsSideOpen] = useState(
-    window.innerWidth > 700 ? true : false
-  );
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 800) {
-      setIsSideOpen(true);
-      setIsMobile(false);
-    } else {
-      setIsSideOpen(false);
-      setIsMobile(true);
-    }
-  });
+const containerEntries = ({ isSideOpen }) => {
+  let x = isSideOpen ? "w-48 h-1" : "w-16 h-1";
+
+  let entries = [
+    { date: 24, entries: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"] },
+    { date: 23, entries: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"] },
+    { date: 24, entries: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"] },
+    { date: 23, entries: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"] },
+  ];
 
   return (
-    <>
-      <Header />
-      <MainContent
-        isSideOpen={isSideOpen}
-        setIsSideOpen={setIsSideOpen}
-        isMobile={isMobile}
-        setIsMobile={setIsMobile}
-      />
-    </>
+    <div className="w-full flex flex-col gap-40">
+      <ConAddEntry />
+      <Entries isSideOpen={isSideOpen} entries={entries} />
+      <div className=""></div>
+    </div>
   );
 };
 
-export default timetracker;
+export default containerEntries;
