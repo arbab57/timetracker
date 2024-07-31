@@ -10,10 +10,11 @@ import {
   FaUserAlt,
   FaChevronLeft,
 } from "react-icons/fa";
+import "../App.css";
 
 const sidebar = ({ setIsSideOpen, isSideOpen }) => {
   return (
-    <div className="h-screen sticky top-0">
+    <div className="h-screen sticky top-0 flex flex-col">
       <div className="h-16"></div>
 
       <nav className="shadow-md border-r border-gray-300 w-48 h-full bg-white z-10">

@@ -10,12 +10,19 @@ import {
   FaUserAlt,
   FaChevronLeft,
 } from "react-icons/fa";
+import { FaBars, FaUser } from "react-icons/fa";
 
 const sidebar = ({ setIsSideOpen, isSideOpen }) => {
   return (
     <div className="w-screen fixed top-0 bg-gray-500 z-50 bg-opacity-50">
       <div className=" h-screen ">
-        <div className="h-16"></div>
+        <div className="flex items-center gap-2 h-16 bg-white w-48">
+          <FaBars className="text-2xl ml-5" />
+          <div className="flex items-center gap-1 ">
+            <FaClock className="text-2xl text-blue-500" />
+            <p className="font-bold text-2xl">ClockIt</p>
+          </div>
+        </div>
 
         <nav className="shadow-md border-r relative border-gray-300 w-48 h-full bg-white z-10">
           <div
