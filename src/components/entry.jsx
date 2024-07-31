@@ -15,13 +15,13 @@ const entry = ({ task }) => {
       </div>
 
       <div className="flex sm:flex-row flex-col  justify-between  items-center ">
-        <div className="flex w-full justify-between">
-          <button className="text-xl text-blue-500 p-3 h-12 sm:w-16 flex items-center justify-center  hover:bg-blue-500 hover:text-white transition border-l border-gray-200">
+        <div className="flex sm:flex-row flex-row-reverse w-full justify-between">
+          <button className="text-xl text-blue-500 p-3 h-12 w-16 flex items-center justify-center  hover:bg-blue-500 hover:text-white transition border-r sm:border-l border-gray-200">
             <FaTag />
           </button>
-          <div className="flex gap-4 items-center border-l border-gray-200 h-12 px-3">
+          <div className="flex gap-4 items-center border-l border-gray-200 h-12 sm:px-3">
             <input
-              className=" outline-none hover:border-gray-400 hover:border p-3  h-11 w-16 font-medium text-gray-500 rounded-sm"
+              className=" outline-none hover:border-gray-400 hover:border py-3 sm:px-3 px-2  h-11 w-16 font-medium text-gray-500 rounded-sm"
               defaultValue={"5:00"}
               type="text"
             />
@@ -35,10 +35,10 @@ const entry = ({ task }) => {
         </div>
 
         <div className="flex justify-between w-full">
-          <p className="font-semibold text-xl border-l border-gray-200 h-12 py-3 px-6 flex items-center justify-center">
+          <p className="font-semibold text-xl border-l border-gray-200 h-12 py-3 sm:px-6 px-2 flex items-center justify-center">
             00:00:00
           </p>
-          <button className="text-xl text-gray-500 hover:text-white h-12 w-16 flex items-center justify-center hover:bg-blue-500 p-3 transition border-l border-gray-200">
+          <button className="text-xl sm:text-gray-500 text-white hover:text-white h-12 w-16 flex items-center justify-center hover:bg-blue-500 p-3 sm:bg-transparent bg-blue-500  transition border-r sm:border-l border-gray-200">
             <FaPlay />
           </button>
         </div>
