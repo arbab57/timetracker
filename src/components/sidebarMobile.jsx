@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   FaClock,
   FaCheckSquare,
@@ -10,9 +9,9 @@ import {
   FaUserAlt,
   FaChevronLeft,
 } from "react-icons/fa";
-import { FaBars, FaUser } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 
-const sidebar = ({ setIsSideOpen, isSideOpen }) => {
+const sidebar = ({ setIsSideOpen }) => {
   return (
     <div className="w-screen fixed top-0 bg-gray-500 z-50 bg-opacity-50">
       <div className=" h-screen ">

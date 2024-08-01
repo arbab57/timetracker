@@ -1,5 +1,4 @@
-import React from "react";
-import { FaPlus, FaTag, FaPlay, FaPlusCircle } from "react-icons/fa";
+import { FaTag, FaPlay } from "react-icons/fa";
 import AddProjectBtn from "./addProjectBtn";
 
 const entry = ({ task }) => {

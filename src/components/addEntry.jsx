@@ -1,4 +1,3 @@
-import React from "react";
 import { FaTag } from "react-icons/fa";
 import AddProjectBtn from "./addProjectBtn";
 const addEntry = () => {

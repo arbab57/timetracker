@@ -2,7 +2,6 @@ import "./App.css";
 import {
   Route,
   RouterProvider,
-  Routes,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
@@ -11,14 +10,15 @@ import TimeTracker from "./pages/timetracker";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import LogSign from "./layouts/logSign";
-import Dashboard from "./pages/dashboard";
 import NotFound from "./pages/notFound";
+import Loading from "./pages/loading";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<TimeTracker />} />
+        <Route path="/load" element={<Loading />} />
         <Route path="*" element={<NotFound />} />
       </Route>
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { FaBell, FaQuestionCircle, FaUser } from "react-icons/fa";
 import HoverIcon from "./hoverIcon";
 

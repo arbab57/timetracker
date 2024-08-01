@@ -1,12 +1,9 @@
-import React from "react";
 import Sidebar from "./sidebar";
 import ShortSideBar from "./shortSideBar";
 import SidebarMobile from "./sidebarMobile";
 import ShortsideBarMobile from "./shortsideBarMobile";
-import { useState } from "react";
-import sidebar from "./sidebar";
 
-const navigation = ({ isSideOpen, setIsSideOpen, isMobile, setIsMobile }) => {
+const navigation = ({ isSideOpen, setIsSideOpen, isMobile }) => {
   let nav;
   let sidebarToUse;
   let shortsideBarToUse;

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   FaClock,
   FaCheckSquare,
@@ -11,10 +10,9 @@ import {
   FaChevronLeft,
 } from "react-icons/fa";
 import "../App.css";
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-const sidebar = ({ setIsSideOpen, isSideOpen }) => {
+const sidebar = ({ setIsSideOpen }) => {
   const linkClass = ({ isActive }) => {
     return isActive
       ? "flex gap-2 items-center py-3 w-full bg-gray-200 transition cursor-pointer"

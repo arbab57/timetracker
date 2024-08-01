@@ -1,5 +1,3 @@
-import React from "react";
-
 const inputForm = (props) => {
   return (
     <div className="flex flex-col gap-10 justify-center items-center h-screen ">
