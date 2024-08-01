@@ -9,8 +9,14 @@ import {
   FaUserAlt,
   FaChevronRight,
 } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const ShortSideBar = ({ setIsSideOpen }) => {
+  const linkClass = ({ isActive }) => {
+    return isActive
+      ? "flex gap-2 items-center py-4 w-full bg-gray-200 transition cursor-pointer"
+      : "flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer";
+  };
   return (
     <div className="h-screen sticky top-0 flex flex-col">
       <div className="h-70px"></div>
@@ -19,39 +25,39 @@ const ShortSideBar = ({ setIsSideOpen }) => {
           onClick={() => {
             setIsSideOpen((prev) => !prev);
           }}
-          className="w-6 h-6 text-sm bg-white absolute -right-4 top-72 input-entry flex  justify-center items-center cursor-pointer"
+          className="w-6 h-6 z-50 text-sm bg-white absolute -right-4 top-72 input-entry flex  justify-center items-center cursor-pointer"
         >
           <FaChevronRight />
         </div>
 
-        <div className="flex gap-2 items-center py-4 bg-gray-200 w-full cursor-pointer">
+        <NavLink to={"/"} className={linkClass}>
           <FaClock className="text-gray-500 text-xl ml-5" />
-        </div>
+        </NavLink>
 
-        <div className="flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer">
+        <NavLink to={"/calender"} className={linkClass}>
           <FaCalendar className="text-gray-500 text-xl ml-5" />
-        </div>
+        </NavLink>
 
-        <div className="flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer">
+        <NavLink to={"/dashboard"} className={linkClass}>
           <FaCheckSquare className="text-gray-500 text-xl ml-5" />
-        </div>
+        </NavLink>
 
-        <div className="flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer">
+        <NavLink to={"/reports"} className={linkClass}>
           <FaBook className="text-gray-500 text-xl ml-5" />
-        </div>
+        </NavLink>
 
-        <div className="flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer">
+        <NavLink to={"/projects"} className={linkClass}>
           <FaProjectDiagram className="text-gray-500 text-xl ml-5" />
-        </div>
-        <div className="flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer">
+        </NavLink>
+        <NavLink to={"/tags"} className={linkClass}>
           <FaTag className="text-gray-500 text-xl ml-5" />
-        </div>
-        <div className="flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer">
+        </NavLink>
+        <NavLink to={"/team"} className={linkClass}>
           <FaUsers className="text-gray-500 text-xl ml-5" />
-        </div>
-        <div className="flex gap-2 items-center py-4 w-full hover:bg-gray-200 transition cursor-pointer">
+        </NavLink>
+        <NavLink to={"/clients"} className={linkClass}>
           <FaUserAlt className="text-gray-500 text-xl ml-5" />
-        </div>
+        </NavLink>
       </nav>
     </div>
   );

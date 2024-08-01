@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useRef } from "react";
 import AddCalenderEvent from "./addCalenderEvent";
+import DelCalenderEvent from "./delCalenderEvent";
+import { SideContext } from "../layout/mainContent";
 
 const Calender = () => {
+  const isSideOpen = useContext(SideContext);
+
   const calendarRef = useRef(null);
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([
+    { title: "Event 1", date: "2024-08-01" },
+  ]);
   const [showAdd, setShowAdd] = useState(false);
+  const [showDel, setShowDel] = useState(false);
+
   const [date, setDate] = useState("");
+  const [title, setTitle] = useState("");
 
   let demo = [
     { title: "Event 1", date: "2024-08-01" },
@@ -22,13 +31,26 @@ const Calender = () => {
     setShowAdd(true);
   };
 
+  const handleChangeEvent = (title) => {
+    setTitle(title);
+    setShowDel(true);
+  };
+
   const handleChangeView = (viewName) => {
     if (calendarRef.current) {
       calendarRef.current.getApi().changeView(viewName);
     }
   };
   return (
-    <div className="px-5 w-full pt-24">
+    <div className="sm:px-5 px-3 w-full py-24">
+      {showDel && (
+        <DelCalenderEvent
+          setShowDel={setShowDel}
+          setEvents={setEvents}
+          events={events}
+          title={title}
+        />
+      )}
       {showAdd && (
         <AddCalenderEvent
           setShowAdd={setShowAdd}
@@ -37,29 +59,22 @@ const Calender = () => {
         />
       )}
       <div>
-        <div className="flex gap-2 justify-end mb-2">
-          <select
-            className="bg-gray-700 text-white "
-            id="view-selector"
-            onChange={(e) => {
-              handleChangeView(e.target.value);
-            }}
-            style={{ padding: "8px", fontSize: "16px" }}
-          >
-            <option value="dayGridMonth">Month View</option>
-            <option value="timeGridWeek">Week View</option>
-            <option value="timeGridDay">Day View</option>
-          </select>
-        </div>
-
         <FullCalendar
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          height={625}
           ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
+          initialView={isSideOpen ? "dayGridMonth" : "dayGridMonth"}
           events={events}
           editable={true}
           selectable={true}
-          eventClick={(info) => {}}
+          eventClick={(info) => {
+            handleChangeEvent(info.event.title);
+          }}
           dateClick={(info) => {
             handleAddEvent(info.dateStr);
           }}

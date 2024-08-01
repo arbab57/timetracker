@@ -1,11 +1,22 @@
-import { useRef } from "react";
-const AddCalenderEvent = ({ setShowAdd, date }) => {
+import { useRef, useState } from "react";
+const AddCalenderEvent = ({ setShowAdd, date, setEvents }) => {
   const nameRef = useRef(null);
   const colorRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hello", nameRef.current.value, colorRef.current.value, date);
+    if (nameRef.current.value !== "") {
+      const newEvent = {
+        title: nameRef.current.value,
+        date: date,
+        color: colorRef.current.value,
+      };
+      setEvents((prevEvents) => {
+        return [...prevEvents, newEvent];
+      });
+    }
+
+    setShowAdd(false);
   };
   return (
     <div className="fixed top-0 left-0 z-50 h-screen w-screen bg-black bg-opacity-40 flex  justify-center items-center ">
@@ -39,10 +50,9 @@ const AddCalenderEvent = ({ setShowAdd, date }) => {
             name=""
             id=""
           >
-            <option value="default">Default</option>
+            <option value="">Default(Blue)</option>
             <option value="red">Red</option>
-            <option value="blue">Blue</option>
-            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
             <option value="black">Black</option>
           </select>
 
