@@ -1,5 +1,3 @@
-import React from "react";
-import { FaPlus, FaFlag } from "react-icons/fa";
 import { BiPlusCircle } from "react-icons/bi";
 const addProjectBtn = () => {
   return (

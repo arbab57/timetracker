@@ -2,9 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '@fullcalendar/core/main.css';
+@import '@fullcalendar/daygrid/main.css';
+@import '@fullcalendar/timegrid/main.css';
+
 body {
     background-color: #f2f6f8;
 }
+
+.fc .fc-view-harness {
+    box-shadow: 1px 1px 10px rgb(151, 151, 151);
+}
+
+
 
 .bg-main {
     background-color: #f2f6f8;
@@ -13,3 +23,67 @@ body {
 /* #root {
     height: 500vh;
 } */
+
+.h-70px {
+    height: 70px !important;
+}
+
+.fc-daygrid-day-frame {
+    background-color: white;
+}
+
+
+/* Container styling */
+.calendar-container {
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for the entire calendar */
+    border-radius: 10px; /* Optional: Add rounded corners */
+  }
+  
+  /* Default toolbar styling */
+  .fc-header-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fc-toolbar-title {
+    /* color: #3788d8; */
+    color: #2c3e50;
+    font-weight: bold;
+  }
+ 
+ 
+  /* Responsive design: Adjust toolbar on smaller screens */
+  @media (max-width: 768px) {
+    .fc-header-toolbar {
+      flex-direction: column; /* Stack toolbar items vertically */
+    }
+  
+    .fc-header-toolbar .fc-left, 
+    .fc-header-toolbar .fc-center, 
+    .fc-header-toolbar .fc-right {
+      width: 100%; /* Full width for each section */
+      text-align: center; /* Center align text */
+      margin-bottom: 10px; /* Add space between sections */
+    }
+  
+    /* Optionally, hide certain buttons on smaller screens */
+    .fc-header-toolbar .fc-right {
+      display: none; /* Hide the right section on smaller screens */
+    }
+  
+  }
+  
+
+
+
+
+
+
+
+
+
+
+  

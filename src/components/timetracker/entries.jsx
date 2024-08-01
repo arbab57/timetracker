@@ -1,4 +1,3 @@
-import React from "react";
 import DayEntries from "./dayEntries";
 
 const entries = ({ isSideOpen, entries }) => {
