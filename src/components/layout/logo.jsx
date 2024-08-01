@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { FaBars, FaClock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 

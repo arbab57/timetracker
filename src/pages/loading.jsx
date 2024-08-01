@@ -1,4 +1,4 @@
-import Spinner from "../components/spinner";
+import Spinner from "../components/general/spinner";
 const loading = () => {
   return (
     <div className="w-screen h-screen bg-white fixed top-0 flex items-center justify-center z-50 gap-3">

@@ -9,7 +9,7 @@ import {
   FaUserAlt,
   FaChevronLeft,
 } from "react-icons/fa";
-import "../App.css";
+import "../../App.css";
 import { NavLink } from "react-router-dom";
 
 const sidebar = ({ setIsSideOpen }) => {

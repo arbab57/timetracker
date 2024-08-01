@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import ConAddEntry from "../components/conAddEntry";
-import Entries from "../components/entries";
+import ConAddEntry from "../components/timetracker/conAddEntry";
+import Entries from "../components/timetracker/entries";
 
 const containerEntries = ({ isSideOpen }) => {
   let x = isSideOpen ? "w-48 h-1" : "w-16 h-1";
+  console.log(isSideOpen);
 
   let entries = [
     { date: 24, entries: ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5"] },

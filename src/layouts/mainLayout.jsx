@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../components/header";
-import MainContent from "../components/mainContent";
+import Header from "../components/layout/header";
+import MainContent from "../components/layout/mainContent";
 import { useState } from "react";
 
 const mainLayout = () => {

@@ -12,12 +12,14 @@ import Signup from "./pages/signup";
 import LogSign from "./layouts/logSign";
 import NotFound from "./pages/notFound";
 import Loading from "./pages/loading";
+import CalenderPage from "./pages/calenderPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<TimeTracker />} />
+        <Route path="/calender" element={<CalenderPage />} />
         <Route path="/load" element={<Loading />} />
         <Route path="*" element={<NotFound />} />
       </Route>
