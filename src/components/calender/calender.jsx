@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -10,14 +10,13 @@ import { SideContext } from "../layout/mainContent";
 
 const Calender = () => {
   const isSideOpen = useContext(SideContext);
-
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([
-    { title: "Event 1", date: "2024-08-01" },
+    { title: "Event 2", date: "2024-08-02" },
+    { title: "Event 2", date: "2024-08-02" },
   ]);
   const [showAdd, setShowAdd] = useState(false);
   const [showDel, setShowDel] = useState(false);
-
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
 
@@ -25,6 +24,12 @@ const Calender = () => {
     { title: "Event 1", date: "2024-08-01" },
     { title: "Event 2", date: "2024-08-02" },
   ];
+
+  useEffect(() => {
+    fetch("http://localhost:3000/calander/data")
+      .then((res) => res.json())
+      .then((json) => setEvents([...json]));
+  }, []);
 
   const handleAddEvent = (dateClicked) => {
     setDate(dateClicked);

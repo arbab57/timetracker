@@ -14,23 +14,25 @@ body {
     box-shadow: 1px 1px 10px rgb(151, 151, 151);
 }
 
-
-
 .bg-main {
     background-color: #f2f6f8;
 }
+.fc-day-today {
+  background-color: rgb(248, 248, 190) !important;
+}
 
-/* #root {
-    height: 500vh;
+.fc-day {
+  background-color: white;
+}
+/* .fc-daygrid-day-frame {
+    background-color: white;
 } */
 
 .h-70px {
     height: 70px !important;
 }
 
-.fc-daygrid-day-frame {
-    background-color: white;
-}
+
 
 
 /* Container styling */
