@@ -3,10 +3,10 @@ import AddProjectBtn from "./addProjectBtn";
 const addEntry = () => {
   return (
     <div className="flex justify-between lg:flex-row flex-col py-2 px-3 input-entry bg-white">
-      <div className="flex items-center justify-between lg:justify-start sm:gap-2 w-full">
+      <div className="flex items-center h-11 justify-between lg:justify-start sm:gap-2 w-full">
         <input
           placeholder="What are you working on?"
-          className="h-10 sm:px-4 px-2 sm:w-3/5 w-full outline-none focus:border-gray-400 focus:border py-3 rounded-sm"
+          className="h-10 lg:px-4 sm:w-3/5 w-full outline-none focus:border-gray-400 focus:border py-3 rounded-sm"
           type="text"
         />
         <AddProjectBtn />
