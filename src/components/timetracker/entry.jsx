@@ -3,7 +3,7 @@ import AddProjectBtn from "./addProjectBtn";
 import { convertTimestampToTime } from "../hooks/time";
 import { convertMsToTime } from "../hooks/time";
 
-const entry = ({ entry }) => {
+const entry = ({ entry, projects }) => {
   return (
     <div className="flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300">
       <div className="flex items-center xl:justify-start justify-between gap-2 xl:w-1/2 h-11">
@@ -15,7 +15,7 @@ const entry = ({ entry }) => {
         {entry.project ? (
           <div className="py-2 xl:px-4 px-2">{entry.project}</div>
         ) : (
-          <AddProjectBtn />
+          <AddProjectBtn projects={projects} />
         )}
       </div>
 

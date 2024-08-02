@@ -1,7 +1,11 @@
+import { useState } from "react";
 import DayEntries from "./dayEntries";
-import { convertMsToTime } from "../hooks/time";
 
 const entries = ({ isSideOpen, entries }) => {
+  let projects = entries.map((entry) => {
+    return entry.project;
+  });
+
   let duplicatEntries = [...entries];
   let newArr = [];
   let currentDate;
@@ -39,7 +43,9 @@ const entries = ({ isSideOpen, entries }) => {
   return (
     <div className={x2}>
       {newArr.map((item, index) => {
-        return <DayEntries allEntriesInDay={item} key={index} />;
+        return (
+          <DayEntries allEntriesInDay={item} projects={projects} key={index} />
+        );
       })}
     </div>
   );

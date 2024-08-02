@@ -1,7 +1,7 @@
 import Entry from "./entry";
 import { convertMsToTime } from "../hooks/time";
 
-const dayEntries = ({ allEntriesInDay }) => {
+const dayEntries = ({ allEntriesInDay, projects }) => {
   let totalTime = 0;
   for (let i = 0; i < allEntriesInDay.entries.length; i++) {
     totalTime +=
@@ -18,7 +18,7 @@ const dayEntries = ({ allEntriesInDay }) => {
       </div>
       <div className="flex flex-col sm:gap-0 gap-3">
         {allEntriesInDay.entries.map((item, index) => {
-          return <Entry entry={item} key={index} />;
+          return <Entry entry={item} projects={projects} key={index} />;
         })}
       </div>
     </div>

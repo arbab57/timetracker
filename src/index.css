@@ -32,6 +32,12 @@ body {
     height: 70px !important;
 }
 
+.project-list {
+list-style: circle;
+list-style-type: disc;
+padding-left: 2rem;
+}
+
 
 
 
