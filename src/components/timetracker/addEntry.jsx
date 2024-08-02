@@ -1,18 +1,22 @@
 import { FaTag } from "react-icons/fa";
 import AddProjectBtn from "./addProjectBtn";
 import { useState } from "react";
-const addEntry = () => {
+const addEntry = ({ projects }) => {
   const [project, setProject] = useState("");
 
   return (
-    <div className="flex justify-between lg:flex-row flex-col py-2 px-3 input-entry bg-white">
+    <div className="flex justify-between lg:flex-row flex-col py-2 px-3 input-entry bg-white z-30">
       <div className="flex items-center h-11 justify-between lg:justify-start sm:gap-2 w-full">
         <input
           placeholder="What are you working on?"
           className="h-10 lg:px-4 sm:w-3/5 w-full outline-none focus:border-gray-400 focus:border py-3 rounded-sm"
           type="text"
         />
-        <AddProjectBtn project={project} setProject={setProject} />
+        <AddProjectBtn
+          projects={projects}
+          project={project}
+          setProject={setProject}
+        />
       </div>
 
       <div className="flex items-center justify-between">

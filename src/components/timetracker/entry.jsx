@@ -2,8 +2,11 @@ import { FaTag, FaPlay } from "react-icons/fa";
 import AddProjectBtn from "./addProjectBtn";
 import { convertTimestampToTime } from "../hooks/time";
 import { convertMsToTime } from "../hooks/time";
+import { useState } from "react";
 
 const entry = ({ entry, projects }) => {
+  const [project, setProject] = useState(entry.project ? entry.project : "");
+
   return (
     <div className="flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300">
       <div className="flex items-center xl:justify-start justify-between gap-2 xl:w-1/2 h-11">
@@ -13,9 +16,17 @@ const entry = ({ entry, projects }) => {
           type="text"
         />
         {entry.project ? (
-          <div className="py-2 xl:px-4 px-2">{entry.project}</div>
+          <div className="py-2 xl:px-4 px-2 flex items-center hover:underline cursor-pointer hover:text-blue-500">
+            <ul className="project-list">
+              <li>{project}</li>
+            </ul>
+          </div>
         ) : (
-          <AddProjectBtn projects={projects} />
+          <AddProjectBtn
+            projects={projects}
+            project={project}
+            setProject={setProject}
+          />
         )}
       </div>
 

@@ -9,6 +9,7 @@ const AddProjectForm = ({ handleSubmit }) => {
       className="w-full flex flex-col gap-1 mb-2"
     >
       <input
+        autoComplete="off"
         name="input"
         placeholder="Add project"
         className="w-full px-1 py-1 border border-gray-500 rounded-sm"

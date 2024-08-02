@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { BiPlusCircle, BiPlus, BiSolidCircle } from "react-icons/bi";
+import { BiPlusCircle } from "react-icons/bi";
 import AddProjectForm from "./addProjectForm";
 import AddProjectSuggest from "./addProjectSuggest";
 
-const addProjectBtn = ({ project, setProject }) => {
+const addProjectBtn = ({ project, setProject, projects }) => {
   const [show, setShow] = useState(false);
-
-  let projects = ["timetracker", "calander", "hello", "main", "farm"];
 
   const close = () => {
     setShow((prev) => !prev);
@@ -32,14 +30,14 @@ const addProjectBtn = ({ project, setProject }) => {
     <div className="inline-block relative cursor-pointer">
       <div onClick={close}>
         {project ? (
-          <div className="py-2 xl:px-4 px-2 flex items-center">
+          <div className="py-2 xl:px-4 px-2 flex items-center hover:underline cursor-pointer hover:text-blue-500">
             <ul className="project-list">
               <li>{project}</li>
             </ul>
           </div>
         ) : (
-          <button className="flex gap-1 items-center relative  text-lg text-blue-500 hover:bg-blue-500 hover:text-white transition py-2 xl:px-4 px-2">
-            <div className="flex gap-1 items-center">
+          <button className="flex gap-1 items-center relative text-lg text-blue-500 hover:bg-blue-500 hover:text-white transition py-2 xl:px-4 px-2 ms-2">
+            <div className="flex gap-1 items-center ">
               <BiPlusCircle className="text-lg" />
               <span>Project</span>
             </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import DayEntries from "./dayEntries";
 
-const entries = ({ isSideOpen, entries }) => {
-  let projects = entries.map((entry) => {
+const entries = ({ isSideOpen, entries, projects }) => {
+  let projec = entries.map((entry) => {
     return entry.project;
   });
 

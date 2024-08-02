@@ -60,10 +60,12 @@ const Timetracker = ({ isSideOpen }) => {
     },
   ];
 
+  let projects = ["timetracker", "calander", "hello", "main", "farm"];
+
   return (
     <div className="w-full flex flex-col gap-40">
-      <ConAddEntry />
-      <Entries isSideOpen={isSideOpen} entries={entries} />
+      <ConAddEntry projects={projects} />
+      <Entries isSideOpen={isSideOpen} entries={entries} projects={projects} />
       <div className=""></div>
     </div>
   );
