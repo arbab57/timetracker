@@ -24,3 +24,24 @@ export const convertTimestampToTime = (timestamp) => {
 
   return `${hours}:${minutes}`;
 };
+
+export const time = (seconds) => {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+    2,
+    "0"
+  )}:${String(secs).padStart(2, "0")}`;
+};
+
+export const dateToStringDate = (timestamp) => {
+  const date = new Date(timestamp);
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  return `${String(day).padStart(2, "0")}-${String(month + 1).padStart(
+    2,
+    "0"
+  )}-${String(year)}`;
+};

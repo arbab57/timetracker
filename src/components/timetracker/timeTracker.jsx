@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import ConAddEntry from "./conAddEntry";
 import Entries from "./entries";
+import entries from "./entries";
+
+// {
+//   title: "taskinPRogress",
+//   tags: ["important", "gold"],
+//   project: "asdasd",
+//   startTime: 1722752396489,
+//   inProgress: true,
+// },
 
 const Timetracker = ({ isSideOpen }) => {
-  let entries = [
+  const [entries, setEntries] = useState([
     {
       date: 24,
       title: "task 1",
@@ -58,17 +67,38 @@ const Timetracker = ({ isSideOpen }) => {
       startTime: 1722575996105,
       endTime: 1722587999999,
     },
-  ];
+  ]);
+
+  const [inProgressEntry, setInProgressEntry] = useState(null);
+
   let projects = entries
     .filter((entry) => entry.project !== "")
     .map((entry) => {
       return entry.project;
     });
 
+  const [tagSuggest, setTagSuggest] = useState([
+    ...new Set(entries.flatMap((entries) => entries.tags)),
+  ]);
+
   return (
     <div className="w-full flex flex-col gap-40">
-      <ConAddEntry projects={projects} />
-      <Entries isSideOpen={isSideOpen} entries={entries} projects={projects} />
+      <ConAddEntry
+        projects={projects}
+        tagSuggest={tagSuggest}
+        setTagSuggest={setTagSuggest}
+        setEntries={setEntries}
+        entries={entries}
+        inProgressEntry={inProgressEntry}
+        setInProgressEntry={setInProgressEntry}
+      />
+      <Entries
+        isSideOpen={isSideOpen}
+        entries={entries}
+        projects={projects}
+        tagSuggest={tagSuggest}
+        setTagSuggest={setTagSuggest}
+      />
       <div className=""></div>
     </div>
   );

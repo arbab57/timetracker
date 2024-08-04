@@ -1,5 +1,6 @@
 import Entry from "./entry";
 import { convertMsToTime } from "../hooks/time";
+import entries from "./entries";
 
 const dayEntries = ({
   allEntriesInDay,
