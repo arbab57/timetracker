@@ -10,6 +10,18 @@ body {
     background-color: #f2f6f8;
 }
 
+.toast {
+animation-name: slideinleft;
+animation-duration: 0.25s;
+animation-timing-function: linear;
+animation-iteration-count: 1;
+}
+
+@keyframes slideinleft {
+  from{transform: translateX(100%);}
+  to{transform: translateX(0%);}  
+}
+
 .fc .fc-view-harness {
     box-shadow: 1px 1px 10px rgb(151, 151, 151);
 }

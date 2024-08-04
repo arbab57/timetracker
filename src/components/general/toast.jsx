@@ -23,11 +23,11 @@ const Toast = ({ message, severity = "success", onClose }) => {
   useEffect(() => {
     const fadeOutTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 2300); // Start fading out before 3 seconds
+    }, 2300);
 
     const closeTimer = setTimeout(() => {
       onClose();
-    }, 3000); // Ensure the toast disappears after the transition
+    }, 3000);
 
     return () => {
       clearTimeout(fadeOutTimer);
@@ -37,7 +37,7 @@ const Toast = ({ message, severity = "success", onClose }) => {
 
   return (
     <div
-      className={`fixed w-72 bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg flex items-center space-x-2 transition-opacity duration-700 ease-out ${
+      className={`fixed w-72 bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg flex items-center toast space-x-2 transition-opacity duration-700 ease-out ${
         isVisible ? "opacity-100" : "opacity-0"
       } ${severityStyles[severity]}`}
     >

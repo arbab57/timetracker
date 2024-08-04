@@ -25,6 +25,7 @@ const Calender = () => {
       { title: "Event 2", date: "2024-08-02" },
     ]
   );
+  const [events, setEvents] = useState(data);
 
   let demo = [
     { title: "Event 1", date: "2024-08-01" },
@@ -73,7 +74,7 @@ const Calender = () => {
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               initialView={isSideOpen ? "dayGridMonth" : "dayGridMonth"}
-              events={data}
+              events={events}
               editable={true}
               selectable={true}
               eventClick={(info) => {
