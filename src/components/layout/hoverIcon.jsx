@@ -12,7 +12,7 @@ const HoverMenu = ({ icon }) => {
       <button className="flex items-center">{icon}</button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-0 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+        <div className="absolute right-0 mt-0 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-50">
           <a
             href="#"
             className="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition"

@@ -48,7 +48,7 @@ const addProjectBtn = ({ project, setProject, projects }) => {
       {show && (
         <div
           onMouseLeave={handleClose}
-          className="absolute right-0 mx-auto mt-0 w-72 bg-white input-entry px-3 pt-3 rounded-sm "
+          className="absolute right-0 mx-auto mt-0 w-72 bg-white input-entry px-3 pt-3 rounded-sm z-10"
         >
           <AddProjectForm handleSubmit={handleSubmit} />
           <AddProjectSuggest handleAdd={handleAdd} projects={projects} />

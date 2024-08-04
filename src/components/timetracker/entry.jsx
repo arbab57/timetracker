@@ -15,19 +15,12 @@ const entry = ({ entry, projects }) => {
           className="h-10 xl:px-1 px-2 w-2/5 outline-none focus:border-gray-400 focus:border py-3 font-medium rounded-sm"
           type="text"
         />
-        {entry.project ? (
-          <div className="py-2 xl:px-4 px-2 flex items-center hover:underline cursor-pointer hover:text-blue-500">
-            <ul className="project-list">
-              <li>{project}</li>
-            </ul>
-          </div>
-        ) : (
-          <AddProjectBtn
-            projects={projects}
-            project={project}
-            setProject={setProject}
-          />
-        )}
+
+        <AddProjectBtn
+          projects={projects}
+          project={project}
+          setProject={setProject}
+        />
       </div>
 
       <div className="flex lg:flex-row flex-col  justify-between  items-center ">
