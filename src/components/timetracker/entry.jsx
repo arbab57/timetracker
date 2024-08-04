@@ -3,9 +3,11 @@ import AddProjectBtn from "./addProjectBtn";
 import { convertTimestampToTime } from "../hooks/time";
 import { convertMsToTime } from "../hooks/time";
 import { useState } from "react";
+import AddTag from "./addTag";
 
-const entry = ({ entry, projects }) => {
+const entry = ({ entry, projects, tagSuggest, setTagSuggest }) => {
   const [project, setProject] = useState(entry.project ? entry.project : "");
+  const [tags, setTags] = useState(entry.tags.length > 0 ? entry.tags : []);
 
   return (
     <div className="flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300">
@@ -25,16 +27,14 @@ const entry = ({ entry, projects }) => {
 
       <div className="flex lg:flex-row flex-col  justify-between  items-center ">
         <div className="flex lg:flex-row flex-row-reverse w-full justify-between">
-          <button className="text-xl text-blue-500 xl:p-3 py-3 px-2 h-12 flex items-center justify-center  hover:bg-blue-500 hover:text-white transition border-r sm:border-l border-gray-200">
-            {entry.tag ? (
-              entry.tag
-            ) : (
-              <div className="p-3">
-                <FaTag />
-              </div>
-            )}
-          </button>
-          <div className="flex gap-4 items-center border-l border-gray-200 h-12 lg:px-3">
+          <AddTag
+            tags={tags}
+            setTags={setTags}
+            tagSuggest={tagSuggest}
+            setTagSuggest={setTagSuggest}
+          />
+
+          <div className="flex sm:gap-4 gap-1 items-center border-l border-gray-200 h-12 lg:px-3">
             <input
               size="8"
               className=" outline-none hover:border-gray-400 hover:border py-3 lg:px-3 px-2 h-11 w-16  font-medium text-gray-500 rounded-sm"

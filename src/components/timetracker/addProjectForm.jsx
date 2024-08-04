@@ -1,6 +1,6 @@
 import React from "react";
 
-const AddProjectForm = ({ handleSubmit }) => {
+const AddProjectForm = ({ handleSubmit, boxFor }) => {
   return (
     <form
       onSubmit={(e) => {
@@ -9,6 +9,7 @@ const AddProjectForm = ({ handleSubmit }) => {
       className="w-full flex flex-col gap-1 mb-2"
     >
       <input
+        maxLength={10}
         autoComplete="off"
         name="input"
         placeholder="Add project"
@@ -16,7 +17,7 @@ const AddProjectForm = ({ handleSubmit }) => {
         type="text"
       />
       <button className="text-white bg-blue-500 hover:scale-105 transition rounded-sm w-full py-1 text-lg flex items-center justify-center">
-        Create Project
+        Create {boxFor}
       </button>
     </form>
   );

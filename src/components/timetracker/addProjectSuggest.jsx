@@ -1,16 +1,10 @@
 import React from "react";
 
-const AddProjectSuggest = ({ handleAdd, projects }) => {
+const AddProjectSuggest = ({ handleAdd, projects, boxFor }) => {
   return (
     <div>
-      <button
-        className="hover:bg-blue-500 hover:text-white transition px-2 py-1 rounded-md scale-105"
-        onClick={(e) => {
-          handleAdd(e);
-        }}
-      >
-        No project
-      </button>
+      {projects.length === 0 ? `No ${boxFor}s` : null}
+
       <ul className="flex flex-col items-start gap-4 py-3 project-list">
         {projects.map((item, index) => {
           return (

@@ -2,10 +2,6 @@ import { useState } from "react";
 import DayEntries from "./dayEntries";
 
 const entries = ({ isSideOpen, entries, projects }) => {
-  let projec = entries.map((entry) => {
-    return entry.project;
-  });
-
   let duplicatEntries = [...entries];
   let newArr = [];
   let currentDate;
@@ -37,6 +33,10 @@ const entries = ({ isSideOpen, entries, projects }) => {
     }
   }
 
+  const [tagSuggest, setTagSuggest] = useState([
+    ...new Set(entries.flatMap((entries) => entries.tags)),
+  ]);
+
   let x2 = isSideOpen
     ? "w-full px-9 flex flex-col gap-8"
     : "w-full sm:px-5 px-3 flex flex-col gap-8";
@@ -44,7 +44,13 @@ const entries = ({ isSideOpen, entries, projects }) => {
     <div className={x2}>
       {newArr.map((item, index) => {
         return (
-          <DayEntries allEntriesInDay={item} projects={projects} key={index} />
+          <DayEntries
+            allEntriesInDay={item}
+            projects={projects}
+            tagSuggest={tagSuggest}
+            setTagSuggest={setTagSuggest}
+            key={index}
+          />
         );
       })}
     </div>

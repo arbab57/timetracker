@@ -30,7 +30,7 @@ const addProjectBtn = ({ project, setProject, projects }) => {
     <div className="inline-block relative cursor-pointer">
       <div onClick={close}>
         {project ? (
-          <div className="py-2 xl:px-4 px-2 flex items-center hover:underline cursor-pointer hover:text-blue-500">
+          <div className="py-2 xl:px-4 flex items-center hover:underline cursor-pointer hover:text-blue-500">
             <ul className="project-list">
               <li>{project}</li>
             </ul>
@@ -50,8 +50,12 @@ const addProjectBtn = ({ project, setProject, projects }) => {
           onMouseLeave={handleClose}
           className="absolute right-0 mx-auto mt-0 w-72 bg-white input-entry px-3 pt-3 rounded-sm z-10"
         >
-          <AddProjectForm handleSubmit={handleSubmit} />
-          <AddProjectSuggest handleAdd={handleAdd} projects={projects} />
+          <AddProjectForm handleSubmit={handleSubmit} boxFor={"project"} />
+          <AddProjectSuggest
+            handleAdd={handleAdd}
+            projects={projects}
+            boxFor={"project"}
+          />
         </div>
       )}
     </div>
