@@ -1,7 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Toast from "../components/general/toast";
 import { useNavigate } from "react-router-dom";
 import postData from "../components/hooks/postData";
+import UseAccessToken from "../components/hooks/useAccessToken";
+
 const signup = () => {
   const [showToast, setShowToast] = useState(false);
   const [error, setError] = useState("");
@@ -9,6 +11,33 @@ const signup = () => {
   const passwordRef = useRef(null);
   const cheackBoxRef = useRef(null);
   const navigateTo = useNavigate();
+  const signupAPI = import.meta.env.VITE_signup_api_key;
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      return;
+    }
+    const confirm = async () => {
+      const res = await fetch("http://localhost:8000/users/check", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authentication: `Bearer ${accessToken}`,
+        },
+      });
+      const msg = await res.json();
+
+      if (res.status !== 200) {
+        navigateTo("/users/login", { replace: true });
+        console.log(msg);
+        return;
+      }
+
+      navigateTo("/");
+    };
+    confirm();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +69,7 @@ const signup = () => {
       password: password,
     };
 
-    const response = await postData("http://localhost:8000/users/signup", data);
+    const response = await postData(signupAPI, data);
 
     if (response.status === 201) {
       navigateTo("/users/login", { replace: true });

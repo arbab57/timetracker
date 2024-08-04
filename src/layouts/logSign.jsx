@@ -2,8 +2,10 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { FaClock } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import UseAccessToken from "../components/hooks/useAccessToken";
 
 const logSign = ({ link }) => {
+  // const accessToken = UseAccessToken();
   return (
     <>
       <header className="lg:px-48 sm:px-20 px-8 py-4 flex justify-between items-center fixed top-0 w-screen">

@@ -1,85 +1,44 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import ConAddEntry from "./conAddEntry";
 import Entries from "./entries";
-import entries from "./entries";
-
-// {
-//   title: "taskinPRogress",
-//   tags: ["important", "gold"],
-//   project: "asdasd",
-//   startTime: 1722752396489,
-//   inProgress: true,
-// },
+import { useNavigate } from "react-router-dom";
+import UseAccessToken from "../hooks/useAccessToken";
 
 const Timetracker = ({ isSideOpen }) => {
-  const [entries, setEntries] = useState([
-    {
-      date: 24,
-      title: "task 1",
-      showDate: "24-07-2022",
-      project: "",
-      tags: ["important", "gold"],
-      startTime: 1722575996105,
-      endTime: 1722585999999,
-    },
-    {
-      date: 24,
-      title: "task 2",
-      showDate: "24-07-2022",
-      project: "TimeTrac",
-      tags: ["important"],
-      startTime: 1722575996105,
-      endTime: 1722578999999,
-    },
-    {
-      date: 24,
-      title: "task 3",
-      showDate: "24-07-2022",
-      project: "",
-      tags: [],
-      startTime: 1722575996105,
-      endTime: 1722585999999,
-    },
-    {
-      date: 23,
-      title: "task 1",
-      showDate: "23-07-2022",
-      project: "TimeTracker1",
-      tags: [],
-      startTime: 1722575996105,
-      endTime: 1722581999999,
-    },
-    {
-      date: 22,
-      title: "task 1",
-      showDate: "23-07-2022",
-      project: "TimeTracker123",
-      tags: [],
-      startTime: 1722575996105,
-      endTime: 1722579999999,
-    },
-    {
-      date: 21,
-      title: "task 1",
-      showDate: "21-07-2022",
-      project: "TimeTracker13",
-      tags: ["important", "gold"],
-      startTime: 1722575996105,
-      endTime: 1722587999999,
-    },
-  ]);
-
+  const [entries, setEntries] = useState([]);
+  const navigateTo = useNavigate();
+  const [accessToken] = UseAccessToken();
   const [inProgressEntry, setInProgressEntry] = useState(null);
+  const timeTrackerAPI = import.meta.env.VITE_timeTracker_api;
 
-  let projects = entries
-    .filter((entry) => entry.project !== "")
-    .map((entry) => {
-      return entry.project;
-    });
+  useEffect(() => {
+    const AccessToken = localStorage.getItem("accessToken");
+    const fetchData = async () => {
+      const response = await fetch(timeTrackerAPI, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          authentication: `Bearer ${AccessToken}`,
+        },
+      });
+      const data = await response.json();
+      console.log(data.data);
+      setEntries(data.data);
+    };
 
-  const [tagSuggest, setTagSuggest] = useState([
-    ...new Set(entries.flatMap((entries) => entries.tags)),
-  ]);
+    fetchData();
+  }, []);
+
+  let projects;
+  let tagSuggest;
+  if (entries.length > 0) {
+    projects = [...new Set(entries.map((entry) => entry.project))];
+
+    tagSuggest = [...new Set(entries.flatMap((entries) => entries.tags))];
+  }
+
+  console.log("tags", tagSuggest);
+  console.log("maps", projects);
 
   return (
     <div className="w-full flex flex-col gap-40">

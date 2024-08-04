@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import Toast from "../components/general/toast";
 import postData from "../components/hooks/postData";
+import UseAccessToken from "../components/hooks/useAccessToken";
 
 const login = () => {
   const [showToast, setShowToast] = useState(false);
@@ -10,6 +11,32 @@ const login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigateTo = useNavigate();
+  const loginAPI = import.meta.env.VITE_login_api_key;
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) {
+      return;
+    }
+    const confirm = async () => {
+      const res = await fetch("http://localhost:8000/users/check", {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authentication: `Bearer ${accessToken}`,
+        },
+      });
+      const msg = await res.json();
+
+      if (res.status !== 200) {
+        navigateTo("/users/login", { replace: true });
+        return;
+      }
+
+      navigateTo("/");
+    };
+    confirm();
+  }, []);
 
   const handleSubmit = () => {
     const email = emailRef.current.value;
@@ -30,9 +57,19 @@ const login = () => {
 
   const sendData = async (email, password) => {
     const data = { email: email, password: password };
-    const response = await postData("http://localhost:8000/users/login", data);
+    const response = await postData(loginAPI, data);
+    if (response.status !== 200) {
+      const message = await response.json();
+      setError(message.message);
+      setShowToast(true);
+      return;
+    }
     const access = await response.json();
-    console.log(access);
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.setItem("accessToken", access.accessToken);
+    localStorage.setItem("refreshToken", access.refreshToken);
+    navigateTo("/", { replace: true });
   };
 
   return (

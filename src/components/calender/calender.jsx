@@ -9,6 +9,7 @@ import DelCalenderEvent from "./delCalenderEvent";
 import { SideContext } from "../layout/mainContent";
 import UseFetch from "../hooks/useFetch";
 import Loading from "../../pages/loading";
+import UseAccessToken from "../hooks/useAccessToken";
 
 const Calender = () => {
   const isSideOpen = useContext(SideContext);
@@ -17,6 +18,8 @@ const Calender = () => {
   const [showDel, setShowDel] = useState(false);
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
+
+  const [accessToken] = UseAccessToken();
 
   const [data, error, loading] = UseFetch(
     "http://localhost:3000/calander/data",

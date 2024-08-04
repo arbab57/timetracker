@@ -13,29 +13,30 @@ const entries = ({
   let currentDate;
   let done = false;
   let objNum = -1;
-
-  while (!done) {
-    objNum++;
-    done = true;
-    currentDate = duplicatEntries[0].showDate;
-    const obj = { date: currentDate, entries: [] };
-    obj.entries.push(duplicatEntries.shift());
-    newArr.push(obj);
-    if (duplicatEntries.length === 0) {
-      break;
-    }
-    if (duplicatEntries[0].showDate !== currentDate) {
-      done = false;
-      continue;
-    }
-
-    for (let j = 0; j < duplicatEntries.length; j++) {
-      if (duplicatEntries[0].showDate === currentDate) {
-        newArr[objNum].entries.push(duplicatEntries.shift());
+  if (entries.length > 0) {
+    while (!done) {
+      objNum++;
+      done = true;
+      currentDate = duplicatEntries[0].showDate;
+      const obj = { date: currentDate, entries: [] };
+      obj.entries.push(duplicatEntries.shift());
+      newArr.push(obj);
+      if (duplicatEntries.length === 0) {
+        break;
+      }
+      if (duplicatEntries[0].showDate !== currentDate) {
         done = false;
         continue;
       }
-      break;
+
+      for (let j = 0; j < duplicatEntries.length; j++) {
+        if (duplicatEntries[0].showDate === currentDate) {
+          newArr[objNum].entries.push(duplicatEntries.shift());
+          done = false;
+          continue;
+        }
+        break;
+      }
     }
   }
 

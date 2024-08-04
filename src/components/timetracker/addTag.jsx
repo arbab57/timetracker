@@ -33,6 +33,7 @@ const AddTag = ({ tags, setTags, tagSuggest, setTagSuggest }) => {
     close();
   };
   const handleSubmit = (e) => {
+    console.log(1);
     e.preventDefault();
     if (e.target.input.value) {
       if (tags.length > 1) {
