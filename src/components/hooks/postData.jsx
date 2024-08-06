@@ -1,11 +1,19 @@
 const postData = async (url, data) => {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
+  const AccessToken = localStorage.getItem("accessToken");
 
-  return response;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authentication: `Bearer ${AccessToken}`,
+      },
+      body: JSON.stringify(data),
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default postData;

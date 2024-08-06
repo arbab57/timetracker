@@ -7,6 +7,7 @@ const addEntry = ({
   setEntries,
   inProgressEntry,
   setInProgressEntry,
+  loading,
 }) => {
   let x2 =
     "w-full sm:px-5 px-3 sticky top-16 lg:h-24 h-32 bg-main flex flex-col justify-end z-30";
@@ -20,6 +21,7 @@ const addEntry = ({
         setEntries={setEntries}
         inProgressEntry={inProgressEntry}
         setInProgressEntry={setInProgressEntry}
+        loading={loading}
       />
     </div>
   );

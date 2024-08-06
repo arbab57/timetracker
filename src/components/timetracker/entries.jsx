@@ -39,6 +39,7 @@ const entries = ({
       }
     }
   }
+  // console.log(newArr);
 
   let x2 = isSideOpen
     ? "w-full px-9 flex flex-col gap-8"

@@ -1,7 +1,7 @@
 import { FaBars, FaClock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const logo = () => {
+const logo = ({ email }) => {
   return (
     <div className="flex sm:justify-start justify-between items-center sm:gap-7 gap-2 w-full">
       <Link to={"/"} className="flex items-center gap-2">
@@ -13,7 +13,7 @@ const logo = () => {
       </Link>
 
       <div className=" sm:flex hidden items-center h-10">
-        <p className="font-medium text-gray-500">Arbabbashir30's workspace</p>
+        <p className="font-medium text-gray-500">{email}</p>
       </div>
 
       <div className="sm:hidden">
