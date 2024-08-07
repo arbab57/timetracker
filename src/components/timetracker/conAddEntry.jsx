@@ -8,6 +8,7 @@ const addEntry = ({
   inProgressEntry,
   setInProgressEntry,
   loading,
+  setReRun,
 }) => {
   let x2 =
     "w-full sm:px-5 px-3 sticky top-16 lg:h-24 h-32 bg-main flex flex-col justify-end z-30";
@@ -22,6 +23,7 @@ const addEntry = ({
         inProgressEntry={inProgressEntry}
         setInProgressEntry={setInProgressEntry}
         loading={loading}
+        setReRun={setReRun}
       />
     </div>
   );

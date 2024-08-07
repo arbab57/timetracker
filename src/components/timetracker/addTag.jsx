@@ -4,7 +4,13 @@ import { FaTag } from "react-icons/fa";
 import AddProjectForm from "./addProjectForm";
 import AddProjectSuggest from "./addProjectSuggest";
 
-const AddTag = ({ tags, setTags, tagSuggest, setTagSuggest }) => {
+const AddTag = ({
+  tags,
+  setTags,
+  tagSuggest,
+  setTagSuggest,
+  setShouldChange,
+}) => {
   const [show, setShow] = useState(false);
   const [TagIndex, setIndex] = useState(null);
 
@@ -24,6 +30,7 @@ const AddTag = ({ tags, setTags, tagSuggest, setTagSuggest }) => {
           return tag;
         });
       });
+      setShouldChange((prev) => !prev);
       close();
       return;
     }
@@ -61,6 +68,8 @@ const AddTag = ({ tags, setTags, tagSuggest, setTagSuggest }) => {
           return tag;
         });
       });
+      setShouldChange((prev) => !prev);
+
       setTagSuggest((prev) => {
         return [e.target.input.value, ...prev];
       });

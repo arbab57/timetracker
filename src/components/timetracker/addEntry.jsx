@@ -6,6 +6,8 @@ import { dateToStringDate } from "../hooks/time";
 import postData from "../hooks/postData";
 import UseFetch from "../hooks/useFetch";
 import Loading from "../../pages/loading";
+import { useNavigate } from "react-router-dom";
+
 //
 const addEntry = ({
   projects,
@@ -14,6 +16,7 @@ const addEntry = ({
   setEntries,
   setInProgressEntry,
   inProgressEntry,
+  setReRun,
 }) => {
   const [tags, setTags] = useState([]);
   const [project, setProject] = useState("");
@@ -21,17 +24,19 @@ const addEntry = ({
   const [isOn, setIsOn] = useState(false);
   const timerRef1 = useRef(null);
   const inputRef1 = useRef(null);
-  const [inProgress, setInProgress] = useState(null);
   const [x, setX] = useState(null);
+  const navigate = useNavigate();
 
-  const [data, error, loading] = UseFetch(
-    "http://localhost:8000/timetracker/data/inprogress"
+  const [inProgress, error, loading] = UseFetch(
+    "http://localhost:8000/timetracker/data/inprogress",
+    [],
+    [isOn]
   );
+  // console.log(inProgress);
 
   useEffect(() => {
-    if (!loading) {
-      setInProgress(data);
-      if (inProgress) {
+    if (!loading && inProgress !== null) {
+      if (inProgress.inProgress) {
         inputRef1.current.value = inProgress.title;
         setProject(inProgress.project);
         setTags(inProgress.tags);
@@ -45,7 +50,6 @@ const addEntry = ({
 
   const startClock = () => {
     setIsOn(true);
-
     timerRef1.current = setInterval(
       () => setCount((prevCount) => prevCount + 1),
       1000
@@ -63,7 +67,6 @@ const addEntry = ({
   };
 
   const addEntry = async () => {
-    console.log(inProgress);
     const entryToAdd = {
       date: new Date().getDate(),
       title: inProgress.title,
@@ -75,12 +78,17 @@ const addEntry = ({
     };
     const response = await postData(
       "http://localhost:8000/timetracker/data",
-      newEntry
+      entryToAdd
     );
+    const resJson = await response.json();
 
     if (response.status === 201) {
-      setEntries((prev) => {
-        return [entryToAdd, ...prev];
+      const resp = await postData(
+        "http://localhost:8000/timetracker/data/clear/progress",
+        {}
+      );
+      setReRun((prev) => {
+        return !prev;
       });
     }
   };
@@ -97,9 +105,7 @@ const addEntry = ({
       "http://localhost:8000/timetracker/data/progress",
       newEntry
     );
-    inProgress = newEntry;
-    // console.log(response);
-    setInProgressEntry(newEntry);
+    // navigate("/", { replace: true });
     startClock();
   };
 

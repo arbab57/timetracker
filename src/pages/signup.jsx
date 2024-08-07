@@ -62,23 +62,34 @@ const signup = () => {
   };
 
   const postDetails = async () => {
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    const data = {
-      email: email,
-      password: password,
-    };
+    try {
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      const data = {
+        email: email,
+        password: password,
+      };
+      const response = await fetch(signupAPI, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    const response = await postData(signupAPI, data);
-
-    if (response.status === 201) {
-      navigateTo("/users/login", { replace: true });
-    }
-    if (response.status !== 201) {
-      const message = await response.json();
+      if (response.status === 201) {
+        navigateTo("/users/login", { replace: true });
+      }
+      if (response.status !== 201) {
+        const message = await response.json();
+        setShowToast(true);
+        setError(message.message);
+        return;
+      }
+    } catch (error) {
+      setError("failed to connect to server");
       setShowToast(true);
-      setError(message.message);
-      return;
+      console.log(error.message);
     }
   };
 

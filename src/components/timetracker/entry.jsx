@@ -1,30 +1,83 @@
-import { FaTag, FaPlay } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import AddProjectBtn from "./addProjectBtn";
 import { convertTimestampToTime } from "../hooks/time";
 import { convertMsToTime } from "../hooks/time";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AddTag from "./addTag";
+import { dateToStringDate } from "../hooks/time";
 
-const entry = ({ entry, projects, tagSuggest, setTagSuggest }) => {
+const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
   const [project, setProject] = useState(entry.project ? entry.project : "");
   const [tags, setTags] = useState(entry.tags.length > 0 ? entry.tags : []);
+  const [title, setTitle] = useState(null);
+  const [shouldChange, setShouldChange] = useState(false);
+
+  const titleRef = useRef(null);
+  const dateRef = useRef(null);
+  const showDateRef = useRef(null);
+
+  // useEffect(() => {
+  //   setProject(entry.project ? entry.project : "");
+  //   setTags(entry.tags.length > 0 ? entry.tags : []);
+  // }, [entry.project, entry.tags]);
 
   useEffect(() => {
-    setProject(entry.project ? entry.project : "");
-    setTags(entry.tags.length > 0 ? entry.tags : []);
-  }, [entry.project, entry.tags]);
+    if (shouldChange) {
+      handleChange();
+      setShouldChange((prev) => !prev);
+    }
+  }, [tags, project, title]);
 
   const handleChange = () => {
-    console.log("change");
+    const updatedEntry = {
+      date: new Date(entry.startTime).getDate(),
+      title: titleRef.current.value ? titleRef.current.value : "",
+      showDate: dateToStringDate(entry.startTime),
+      project: project,
+      tags: tags,
+      startTime: entry.startTime,
+      endTime: entry.endTime,
+    };
+    console.log(updatedEntry);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const id = entry._id;
+      const AccessToken = localStorage.getItem("accessToken");
+      const response = await fetch("http://localhost:8000/timetracker/data", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          authentication: `Bearer ${AccessToken}`,
+        },
+        body: JSON.stringify({ id: id }),
+      });
+      if (response.status === 200) {
+        setReRun((prev) => !prev);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
-    <div className="flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300">
+    <div className="flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300 relative">
+      <div
+        onClick={handleDelete}
+        className="absolute right-0 top-0 font-bold text-white px-2 bg-red-500 h-full flex items-center justify-center cursor-pointer"
+      >
+        x
+      </div>
       <div className="flex items-center xl:justify-start justify-between gap-2 xl:w-1/2 h-11">
         <input
+          ref={titleRef}
+          onBlur={(e) => {
+            setShouldChange((prev) => !prev);
+            setTitle(e.target.value);
+          }}
           placeholder="Add description"
-          onChange={handleChange}
-          value={entry.title}
+          defaultValue={entry.title}
           className="h-10 xl:px-1 px-2 w-2/5 outline-none focus:border-gray-400 focus:border py-3 font-medium rounded-sm"
           type="text"
         />
@@ -33,6 +86,7 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest }) => {
           projects={projects}
           project={project}
           setProject={setProject}
+          SetShouldChange={shouldChange}
         />
       </div>
 
@@ -43,12 +97,13 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest }) => {
             setTags={setTags}
             tagSuggest={tagSuggest}
             setTagSuggest={setTagSuggest}
+            setShouldChange={setShouldChange}
           />
 
           <div className="flex sm:gap-4 gap-1 items-center border-l border-gray-200 h-12 lg:px-3">
             <input
-              onChange={handleChange}
               size="8"
+              readOnly
               className=" outline-none hover:border-gray-400 hover:border py-3 lg:px-3 px-2 h-11 w-16  font-medium text-gray-500 rounded-sm"
               value={convertTimestampToTime(entry.startTime)}
               type="text"
@@ -57,7 +112,7 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest }) => {
             <span>-</span>
 
             <input
-              onChange={handleChange}
+              readOnly
               className="outline-none hover:border-gray-400 hover:border p-3 h-11 w-16 font-medium text-gray-500 rounded-sm"
               value={convertTimestampToTime(entry.endTime)}
               type="text"

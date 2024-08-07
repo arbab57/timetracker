@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
 import ConAddEntry from "./conAddEntry";
 import Entries from "./entries";
-import { useNavigate } from "react-router-dom";
 import UseAccessToken from "../hooks/useAccessToken";
 import UseFetch from "../hooks/useFetch";
 
 const Timetracker = ({ isSideOpen }) => {
   const [entries, setEntries] = useState([]);
-  const navigateTo = useNavigate();
   const [accessToken] = UseAccessToken();
   const [projects, setProjects] = useState([]);
   const [tagSuggest, setTagSuggest] = useState([]);
   const [inProgressEntry, setInProgressEntry] = useState(null);
+  const [reRun, setReRun] = useState(false);
   const timeTrackerAPI = import.meta.env.VITE_timeTracker_api;
 
-  const [data, error, loading] = UseFetch(timeTrackerAPI, []);
+  const [data, error, loading] = UseFetch(timeTrackerAPI, [], [reRun]);
 
   useEffect(() => {
     if (!loading) {
@@ -38,10 +37,6 @@ const Timetracker = ({ isSideOpen }) => {
         tagSuggest.push(newTags[i]);
       }
     }
-    // console.log(entries);
-    // console.log(projects);
-    // console.log(tagSuggest);
-    // console.log(inProgressEntry);
   }, [data]);
 
   return (
@@ -49,19 +44,21 @@ const Timetracker = ({ isSideOpen }) => {
       <ConAddEntry
         projects={projects}
         tagSuggest={tagSuggest}
-        // setTagSuggest={setTagSuggest
+        setTagSuggest={setTagSuggest}
         setEntries={setEntries}
         entries={entries}
         inProgressEntry={inProgressEntry}
         setInProgressEntry={setInProgressEntry}
         loading={loading}
+        setReRun={setReRun}
       />
       <Entries
         isSideOpen={isSideOpen}
         entries={entries}
         projects={projects}
         tagSuggest={tagSuggest}
-        // setTagSuggest={setTagSuggest}
+        setTagSuggest={setTagSuggest}
+        setReRun={setReRun}
       />
       <div className=""></div>
     </div>
