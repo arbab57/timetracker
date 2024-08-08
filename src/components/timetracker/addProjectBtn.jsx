@@ -3,7 +3,7 @@ import { BiPlusCircle } from "react-icons/bi";
 import AddProjectForm from "./addProjectForm";
 import AddProjectSuggest from "./addProjectSuggest";
 
-const addProjectBtn = ({ project, setProject, projects }) => {
+const addProjectBtn = ({ project, setProject, projects, setShouldChange }) => {
   const [show, setShow] = useState(false);
 
   const close = () => {
@@ -16,12 +16,16 @@ const addProjectBtn = ({ project, setProject, projects }) => {
 
   const handleAdd = (e) => {
     setProject(e.target.innerText);
+    setShouldChange((prev) => !prev);
+
     close();
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (e.target.input.value) {
       setProject(e.target.input.value);
+      setShouldChange((prev) => !prev);
+
       close();
     }
   };

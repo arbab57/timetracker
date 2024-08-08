@@ -20,6 +20,7 @@ const Timetracker = ({ isSideOpen }) => {
       setEntries(data.data);
       for (let i = 0; i < data.data.length; i++) {
         if (
+          data.data[i].project === "" ||
           data.data[i].project === undefined ||
           projects.includes(data.data[i].project)
         ) {
@@ -27,9 +28,11 @@ const Timetracker = ({ isSideOpen }) => {
         }
         projects.push(data.data[i].project);
       }
+
       const newTags = data.data.flatMap((entry) => {
         return entry.tags;
       });
+
       for (let i = 0; i < newTags.length; i++) {
         if (tagSuggest.includes(newTags[i])) {
           continue;

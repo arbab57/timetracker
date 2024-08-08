@@ -31,16 +31,18 @@ const AddTag = ({
         });
       });
       setShouldChange((prev) => !prev);
+
       close();
       return;
     }
     setTags((prev) => {
       return [e.target.innerText, ...prev];
     });
+    setShouldChange((prev) => !prev);
+
     close();
   };
   const handleSubmit = (e) => {
-    console.log(1);
     e.preventDefault();
     if (e.target.input.value) {
       if (tags.length > 1) {
@@ -56,6 +58,8 @@ const AddTag = ({
         setTagSuggest((prev) => {
           return [e.target.input.value, ...prev];
         });
+        setShouldChange((prev) => !prev);
+
         close();
         return;
       }
@@ -68,11 +72,12 @@ const AddTag = ({
           return tag;
         });
       });
-      setShouldChange((prev) => !prev);
 
       setTagSuggest((prev) => {
         return [e.target.input.value, ...prev];
       });
+      setShouldChange((prev) => !prev);
+
       close();
     }
   };
@@ -85,7 +90,7 @@ const AddTag = ({
             onClick={() => {
               setIndex(null), close();
             }}
-            className="text-xl text-blue-500 xl:p-3 py-3 px-2 h-12 flex items-center justify-center  hover:bg-blue-500 hover:text-white transition border-r lg:border-none border-gray-200"
+            className="text-xl text-blue-500 xl:p-3 py-3 px-2 h-12 flex items-center justify-center  hover:bg-blue-500 hover:text-white transition "
           >
             <FaTag />
           </button>

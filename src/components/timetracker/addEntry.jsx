@@ -34,6 +34,9 @@ const addEntry = ({
   );
   // console.log(inProgress);
 
+  const setShouldChange = () => {
+    null;
+  };
   useEffect(() => {
     if (!loading && inProgress !== null) {
       if (inProgress.inProgress) {
@@ -123,6 +126,7 @@ const addEntry = ({
           projects={projects}
           project={project}
           setProject={setProject}
+          setShouldChange={setShouldChange}
         />
       </div>
 
@@ -132,6 +136,7 @@ const addEntry = ({
           setTags={setTags}
           tagSuggest={tagSuggest}
           setTagSuggest={setTagSuggest}
+          setShouldChange={setShouldChange}
         />
         <Clock
           count={count}
