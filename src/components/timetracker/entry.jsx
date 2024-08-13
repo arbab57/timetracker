@@ -119,7 +119,7 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
 
             <input
               readOnly
-              className="outline-none hover:border-gray-400 hover:border p-3 h-11 w-16 font-medium text-gray-500 rounded-sm"
+              className="outline-none font-medium hover:border-gray-400 hover:border p-3 h-11 w-16 text-gray-500 rounded-sm"
               value={convertTimestampToTime(entry.endTime)}
               type="text"
             />
@@ -127,7 +127,7 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
         </div>
 
         <div className="flex justify-between w-full">
-          <p className="font-semibold text-xl border-l border-gray-200 h-12 py-3 lg:px-6 px-2 flex items-center justify-center">
+          <p className=" text-xl border-l border-gray-200 h-12 py-3 lg:px-6 px-2 flex items-center justify-center">
             {convertMsToTime(entry.endTime - entry.startTime)}
           </p>
           <div className="flex">
@@ -136,7 +136,7 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
             </button>
             <div
               onClick={() => setShowDel((prev) => !prev)}
-              className="font-bold text-white px-2 bg-red-500 h-full flex items-center justify-center cursor-pointer"
+              className="font-bold text-xl text-gray-500 px-2 w-16 hover:text-white  hover:bg-red-500 h-full flex items-center justify-center transition cursor-pointer"
             >
               <FaTrash />
             </div>

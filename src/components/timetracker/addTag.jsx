@@ -105,7 +105,7 @@ const AddTag = ({
                     setIndex(index);
                     close();
                   }}
-                  className="sm:px-3 px-1 h-full flex items-center justify-center bg-red-300 rounded-lg text-blue-900 font-semibold hover:scale-105 transition"
+                  className="sm:px-3 px-1 h-full flex items-center justify-center bg-blue-300 rounded-lg text-blue-800 font-semibold hover:scale-105 transition"
                 >
                   {tag}
                 </div>

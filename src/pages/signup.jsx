@@ -13,32 +13,6 @@ const signup = () => {
   const navigateTo = useNavigate();
   const signupAPI = import.meta.env.VITE_signup_api_key;
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      return;
-    }
-    const confirm = async () => {
-      const res = await fetch("http://localhost:8000/users/check", {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authentication: `Bearer ${accessToken}`,
-        },
-      });
-      const msg = await res.json();
-
-      if (res.status !== 200) {
-        navigateTo("/users/login", { replace: true });
-        console.log(msg);
-        return;
-      }
-
-      navigateTo("/");
-    };
-    confirm();
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!cheackBoxRef.current.checked) {

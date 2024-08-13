@@ -27,13 +27,10 @@ const login = () => {
         },
       });
       const msg = await res.json();
-
-      if (res.status !== 200) {
-        navigateTo("/users/login", { replace: true });
+      if (res.status === 200) {
+        navigateTo("/");
         return;
       }
-
-      navigateTo("/");
     };
     confirm();
   }, []);

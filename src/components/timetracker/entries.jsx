@@ -32,35 +32,6 @@ const entries = ({
     objNum++; // Move to the next object
   }
 
-  // if (entries.length > 0) {
-  //   while (!done) {
-  //     if (duplicatEntries.length === 0) {
-  //       break;
-  //     }
-  //     objNum++;
-  //     done = true;
-  //     currentDate = duplicatEntries[0].showDate;
-  //     const obj = { date: currentDate, entries: [] };
-  //     obj.entries.push(duplicatEntries.shift());
-  //     newArr.push(obj);
-
-  //     if (duplicatEntries[0].showDate !== currentDate) {
-  //       done = false;
-  //       continue;
-  //     }
-
-  //     for (let j = 0; j < duplicatEntries.length; j++) {
-  //       if (duplicatEntries[0].showDate === currentDate) {
-  //         newArr[objNum].entries.push(duplicatEntries.shift());
-  //         done = false;
-  //         continue;
-  //       }
-  //       break;
-  //     }
-  //   }
-  // }
-  // console.log(newArr);
-
   let x2 = isSideOpen
     ? "w-full px-9 flex flex-col gap-8"
     : "w-full sm:px-5 px-3 flex flex-col gap-8";

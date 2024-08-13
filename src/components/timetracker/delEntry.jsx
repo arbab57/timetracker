@@ -1,7 +1,7 @@
 import React from "react";
 
-const DelEntry = ({ setShowDel }) => {
-  const handleDelete = () => {
+const DelEntry = ({ setShowDel, handleDelete }) => {
+  const handleClose = () => {
     setShowDel(false);
   };
   return (
