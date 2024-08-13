@@ -2,6 +2,7 @@ import React from "react";
 
 const DelEntry = ({ setShowDel, handleDelete }) => {
   const handleClose = () => {
+    handleDelete()
     setShowDel(false);
   };
   return (
@@ -16,7 +17,7 @@ const DelEntry = ({ setShowDel, handleDelete }) => {
 
         <button
           onClick={() => {
-            handleDelete();
+            handleClose()
           }}
           className="bg-red-500 px-5 py-2 rounded-sm text-white"
         >

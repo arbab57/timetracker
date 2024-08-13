@@ -17,7 +17,7 @@ const Timetracker = ({ isSideOpen }) => {
 
   useEffect(() => {
     if (!loading) {
-      setEntries(data.data);
+      // setEntries(data.data);
       for (let i = 0; i < data.data.length; i++) {
         if (
           data.data[i].project === "" ||
@@ -42,6 +42,7 @@ const Timetracker = ({ isSideOpen }) => {
     }
   }, [data]);
 
+
   return (
     <div className="w-full flex flex-col gap-40">
       <ConAddEntry
@@ -49,19 +50,21 @@ const Timetracker = ({ isSideOpen }) => {
         tagSuggest={tagSuggest}
         setTagSuggest={setTagSuggest}
         setEntries={setEntries}
-        entries={entries}
+        entries={data.data}
         inProgressEntry={inProgressEntry}
         setInProgressEntry={setInProgressEntry}
         loading={loading}
         setReRun={setReRun}
+        reRun={reRun}
       />
       <Entries
         isSideOpen={isSideOpen}
-        entries={entries}
+        entries={data.data ? data.data : []}
         projects={projects}
         tagSuggest={tagSuggest}
         setTagSuggest={setTagSuggest}
         setReRun={setReRun}
+        
       />
       <div className=""></div>
     </div>

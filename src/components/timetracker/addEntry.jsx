@@ -17,6 +17,7 @@ const addEntry = ({
   setInProgressEntry,
   inProgressEntry,
   setReRun,
+  reRun,
 }) => {
   const [tags, setTags] = useState([]);
   const [project, setProject] = useState("");
@@ -24,39 +25,41 @@ const addEntry = ({
   const [isOn, setIsOn] = useState(false);
   const timerRef1 = useRef(null);
   const inputRef1 = useRef(null);
-  const [x, setX] = useState(null);
-  const navigate = useNavigate();
 
   const [inProgress, error, loading] = UseFetch(
     "http://localhost:8000/timetracker/data/inprogress",
     [],
-    [isOn]
+    [ reRun]
   );
-  // console.log(inProgress);
 
   const setShouldChange = () => {
     null;
   };
+
   useEffect(() => {
-    if (!loading && inProgress !== null) {
+    if (!loading && inProgress !== null ) {
       if (inProgress.inProgress) {
-        inputRef1.current.value = inProgress.title;
-        setProject(inProgress.project);
-        setTags(inProgress.tags);
-        setIsOn(true);
-        const secondsPassed = (Date.now() - inProgress.startTime) / 1000;
-        setCount(secondsPassed);
-        startClock();
+          inputRef1.current.value = inProgress.title;
+          setProject(inProgress.project);
+          setTags(inProgress.tags);
+          setIsOn(true)
+          const secondsPassed = (Date.now() - inProgress.startTime) / 1000;
+          setCount(secondsPassed);
+          startClock();
+          return;
       }
     }
-  }, [loading]);
+  }, [inProgress]);
+
 
   const startClock = () => {
-    setIsOn(true);
-    timerRef1.current = setInterval(
-      () => setCount((prevCount) => prevCount + 1),
-      1000
-    );
+    if (!isOn) {
+      setIsOn(true)
+      timerRef1.current = setInterval(
+        () => setCount((prevCount) => prevCount + 1),
+        1000
+      );
+    }
   };
 
   const stopClock = () => {
@@ -90,9 +93,7 @@ const addEntry = ({
         "http://localhost:8000/timetracker/data/clear/progress",
         {}
       );
-      setReRun((prev) => {
-        return !prev;
-      });
+      setReRun((prev) => !prev);
     }
   };
 
@@ -109,6 +110,9 @@ const addEntry = ({
       newEntry
     );
     // navigate("/", { replace: true });
+    setReRun((prev) => {
+      return !prev;
+    });
     startClock();
   };
 

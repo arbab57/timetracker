@@ -1,5 +1,7 @@
 import { FaBars, FaClock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import Clock from "../../assets/clock.svg";
+
 
 const logo = ({ email }) => {
   return (
@@ -7,7 +9,7 @@ const logo = ({ email }) => {
       <Link to={"/"} className="flex items-center gap-2">
         <FaBars className="text-2xl" />
         <div className="flex items-center gap-1 ">
-          <FaClock className="text-2xl text-blue-500" />
+          <img className="w-7" src={Clock} alt="" />
           <p className="font-bold text-2xl">ClockIt</p>
         </div>
       </Link>

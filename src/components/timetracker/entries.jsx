@@ -9,15 +9,14 @@ const entries = ({
   setTagSuggest,
   setReRun,
 }) => {
+
+
   let duplicatEntries = [...entries];
   duplicatEntries = duplicatEntries.sort((a, b) => (a > b ? 0 : -1));
   let newArr = [];
   let currentDate;
   let done = false;
   let objNum = -1;
-
-  // console.log(duplicatEntries);
-
   while (duplicatEntries.length > 0) {
     const currentDate = duplicatEntries[0].showDate;
     const obj = { date: currentDate, entries: [] };
@@ -31,6 +30,7 @@ const entries = ({
 
     objNum++; // Move to the next object
   }
+
 
   let x2 = isSideOpen
     ? "w-full px-9 flex flex-col gap-8"

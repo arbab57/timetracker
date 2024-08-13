@@ -25,7 +25,6 @@ const addProjectBtn = ({ project, setProject, projects, setShouldChange }) => {
     if (e.target.input.value) {
       setProject(e.target.input.value);
       setShouldChange((prev) => !prev);
-
       close();
     }
   };

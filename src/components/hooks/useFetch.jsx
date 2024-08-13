@@ -7,7 +7,6 @@ const UseFetch = (url, initailState, dependencies) => {
   const [loading, setLoading] = useState(true);
   useEffect(
     () => {
-      // console.log("Dep ==>", dependencies);
       const fetchData = async () => {
         try {
           const response = await fetch(url, {
