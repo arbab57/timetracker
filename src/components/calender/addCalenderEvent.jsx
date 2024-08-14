@@ -2,21 +2,33 @@ import { useRef, useState } from "react";
 const AddCalenderEvent = ({ setShowAdd, date, setEvents }) => {
   const nameRef = useRef(null);
   const colorRef = useRef(null);
+  const url = import.meta.env.VITE_calender_api_addEntry
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+  try {
+    const AccessToken = localStorage.getItem("accessToken");
     if (nameRef.current.value !== "") {
-      const newEvent = {
+
+      const newEntry = {
         title: nameRef.current.value,
         date: date,
         color: colorRef.current.value,
       };
-      setEvents((prevEvents) => {
-        return [...prevEvents, newEvent];
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authentication: `Bearer ${AccessToken}`,
+        },
+        body: JSON.stringify(newEntry),
       });
-    }
+      setShowAdd(false);
 
-    setShowAdd(false);
+    }
+  } catch (error) {
+    console.log(error.message)
+  }
+
   };
   return (
     <div className="fixed top-0 left-0 z-50 h-screen w-screen bg-black bg-opacity-40 flex  justify-center items-center ">
@@ -29,11 +41,8 @@ const AddCalenderEvent = ({ setShowAdd, date, setEvents }) => {
             X
           </span>
         </div>
-        <form
+        <div
           className="flex flex-col gap-5"
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
           action=""
         >
           <input
@@ -56,10 +65,10 @@ const AddCalenderEvent = ({ setShowAdd, date, setEvents }) => {
             <option value="black">Black</option>
           </select>
 
-          <button className="px-5 py-2 bg-blue-500 text-white rounded-sm">
+          <button onClick={() => handleSubmit()} className="px-5 py-2 bg-blue-500 text-white rounded-sm">
             Add Event
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

@@ -22,26 +22,17 @@ const Calender = () => {
   const [accessToken] = UseAccessToken();
 
   const [data, error, loading] = UseFetch(
-    "http://localhost:3000/calander/data",
-    [
-      { title: "Event 2", date: "2024-08-02" },
-      { title: "Event 2", date: "2024-08-02" },
-    ]
+    "http://localhost:8000/calander/data", [], [showAdd, showDel]
   );
-  const [events, setEvents] = useState(data);
 
-  let demo = [
-    { title: "Event 1", date: "2024-08-01" },
-    { title: "Event 2", date: "2024-08-02" },
-  ];
 
   const handleAddEvent = (dateClicked) => {
     setDate(dateClicked);
     setShowAdd(true);
   };
 
-  const handleChangeEvent = (title) => {
-    setTitle(title);
+  const handleChangeEvent = (id) => {
+    setTitle(id);
     setShowDel(true);
   };
 
@@ -54,15 +45,13 @@ const Calender = () => {
           {showDel && (
             <DelCalenderEvent
               setShowDel={setShowDel}
-              setEvents={setEvents}
-              events={events}
-              title={title}
+              events={data}
+              id={title}
             />
           )}
           {showAdd && (
             <AddCalenderEvent
               setShowAdd={setShowAdd}
-              setEvents={setEvents}
               date={date}
             />
           )}
@@ -77,11 +66,11 @@ const Calender = () => {
               ref={calendarRef}
               plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
               initialView={isSideOpen ? "dayGridMonth" : "dayGridMonth"}
-              events={events}
+              events={data}
               editable={true}
               selectable={true}
               eventClick={(info) => {
-                handleChangeEvent(info.event.title);
+                handleChangeEvent(info.event._def.extendedProps._id);
               }}
               dateClick={(info) => {
                 handleAddEvent(info.dateStr);
