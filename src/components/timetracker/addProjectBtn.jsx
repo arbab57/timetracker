@@ -30,16 +30,14 @@ const addProjectBtn = ({ project, setProject, projects, setShouldChange }) => {
   };
 
   return (
-    <div className="inline-block relative cursor-pointer">
+    <div className="font-roboto inline-block relative cursor-pointer">
       <div onClick={close}>
         {project ? (
           <div className="py-2 xl:px-4 flex items-center hover:underline cursor-pointer hover:text-blue-500">
-            <ul className="project-list">
-              <li>{project}</li>
-            </ul>
+            <h2 className="">{project}</h2>
           </div>
         ) : (
-          <button className="flex gap-1 items-center relative text-lg text-blue-500 hover:bg-blue-500 hover:text-white transition py-2 xl:px-4 px-2 ms-2">
+          <button className="flex gap-1 items-center relative text-lg text-blue-500 hover:bg-blue-500 hover:text-white transition py-2 xl:px-4 px-2">
             <div className="flex gap-1 items-center ">
               <BiPlusCircle className="text-lg" />
               <span>Project</span>

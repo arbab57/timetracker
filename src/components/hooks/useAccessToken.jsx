@@ -6,6 +6,7 @@ const UseAccessToken = () => {
   const navigateTo = useNavigate();
 
   useEffect(() => {
+  try {
     const accessTokenCheck = localStorage.getItem("accessToken");
     if (!accessTokenCheck) {
       navigateTo("/users/login", { replace: true });
@@ -29,6 +30,9 @@ const UseAccessToken = () => {
     };
 
     confirm();
+  } catch (error) {
+    console.log(error.message)
+  }
   }, [navigateTo]);
 
   return [accessToken];

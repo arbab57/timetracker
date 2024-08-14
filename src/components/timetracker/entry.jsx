@@ -112,7 +112,7 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
   };
 
   return (
-    <div className=" font-roboto flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300 relative">
+    <div className="font-roboto flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300 relative">
           {showToast && (
         <Toast message={"Entry updated"} severity="success" onClose={setShowToast} />
       )}
@@ -128,7 +128,7 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
           }}
           placeholder="Add description"
           value={title}
-          className="h-10 xl:px-1 px-2 w-2/5 outline-none focus:border-gray-400 focus:border py-3 font-medium rounded-sm"
+          className="h-10 xl:px-1 px-2 sm:w-64 w-3/5 outline-none focus:border-gray-400 focus:border py-3 font-medium rounded-sm"
           type="text"
         />
 
@@ -151,22 +151,15 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
           />
 
           <div className="flex sm:gap-4 gap-1 items-center border-l border-gray-200 h-12 lg:px-3">
-            <input
-              size="8"
-              readOnly
-              className=" outline-none hover:border-gray-400 hover:border py-3 lg:px-3 px-2 h-11 w-16  font-medium text-gray-500 rounded-sm"
-              value={convertTimestampToTime(entry.startTime)}
-              type="text"
-            />
+           <p>
+           {convertTimestampToTime(entry.startTime)}
+           </p>
 
             <span>-</span>
-
-            <input
-              readOnly
-              className="outline-none font-medium hover:border-gray-400 hover:border p-3 h-11 w-16 text-gray-500 rounded-sm"
-              value={convertTimestampToTime(entry.endTime)}
-              type="text"
-            />
+          <p>
+          {convertTimestampToTime(entry.endTime)}
+          </p>
+           
           </div>
         </div>
 

@@ -1,16 +1,18 @@
 import { FaBars, FaClock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Clock from "../../assets/clock.svg";
+import logo1 from "../../assets/logo6.svg"
 
 
 const logo = ({ email }) => {
   return (
-    <div className="flex sm:justify-start justify-between items-center sm:gap-7 gap-2 w-full">
+    <div className="flex sm:justify-start justify-between items-center sm:gap-8 gap-2 w-full">
       <Link to={"/"} className="flex items-center gap-2">
         <FaBars className="text-2xl" />
-        <div className="flex items-center gap-1 ">
+        <div className="flex items-center ">
           <img className="w-7" src={Clock} alt="" />
-          <p className="font-bold text-2xl">ClockIt</p>
+          <p className="font-bold italic text-2xl font-roboto">ClockIt</p>
+          {/* <img className="w-36" src={logo1} alt="" /> */}
         </div>
       </Link>
 

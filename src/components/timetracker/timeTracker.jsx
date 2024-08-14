@@ -17,7 +17,6 @@ const Timetracker = ({ isSideOpen }) => {
 
   useEffect(() => {
     if (!loading) {
-      // setEntries(data.data);
       for (let i = 0; i < data.data.length; i++) {
         if (
           data.data[i].project === "" ||

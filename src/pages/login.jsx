@@ -13,27 +13,27 @@ const login = () => {
   const navigateTo = useNavigate();
   const loginAPI = import.meta.env.VITE_login_api_key;
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      return;
-    }
-    const confirm = async () => {
-      const res = await fetch("http://localhost:8000/users/check", {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          authentication: `Bearer ${accessToken}`,
-        },
-      });
-      const msg = await res.json();
-      if (res.status === 200) {
-        navigateTo("/");
-        return;
-      }
-    };
-    confirm();
-  }, []);
+  // useEffect(() => {
+  //   const accessToken = localStorage.getItem("accessToken");
+  //   if (!accessToken) {
+  //     return;
+  //   }
+  //   const confirm = async () => {
+  //     const res = await fetch("http://localhost:8000/users/check", {
+  //       method: "GET",
+  //       headers: {
+  //         "content-type": "application/json",
+  //         authentication: `Bearer ${accessToken}`,
+  //       },
+  //     });
+  //     const msg = await res.json();
+  //     if (res.status === 200) {
+  //       navigateTo("/");
+  //       return;
+  //     }
+  //   };
+  //   confirm();
+  // }, []);
 
   const handleSubmit = () => {
     const email = emailRef.current.value;
