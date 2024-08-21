@@ -1,7 +1,8 @@
 import React from "react";
+import Dashboard from "../components/dashboard/dashboard";
 
 const dashboard = () => {
-  return <div>dashboard</div>;
+  return <Dashboard />
 };
 
 export default dashboard;

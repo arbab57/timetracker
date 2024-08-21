@@ -13,6 +13,7 @@ import NotFound from "./pages/notFound";
 import Loading from "./pages/loading";
 import CalenderPage from "./pages/calenderPage";
 import TimeTrackerPage from "./pages/timetrackerPage";
+import Dashboard from "./pages/dashboardPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<MainLayout />}>
         <Route index element={<TimeTrackerPage />} />
         <Route path="/calender" element={<CalenderPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/load" element={<Loading />} />
         <Route path="*" element={<NotFound />} />
       </Route>

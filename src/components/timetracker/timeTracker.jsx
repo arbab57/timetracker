@@ -15,6 +15,7 @@ const Timetracker = ({ isSideOpen }) => {
 
   const [data, error, loading] = UseFetch(timeTrackerAPI, [], [reRun]);
 
+
   useEffect(() => {
     if (!loading) {
       for (let i = 0; i < data.data.length; i++) {

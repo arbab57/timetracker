@@ -118,7 +118,6 @@ const addEntry = ({
 
   return (
     <div className="flex justify-between lg:flex-row flex-col py-2 px-3 input-entry bg-white z-30">
-      {loading && <Loading />}
       <div className="flex items-center h-11 justify-between lg:justify-start sm:gap-2 w-full">
         <input
           ref={inputRef1}
