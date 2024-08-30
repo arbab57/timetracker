@@ -1,17 +1,15 @@
 import React from "react";
 
-const DelCalenderEvent = ({ setShowDel, id }) => {
+const DelCalenderEvent = ({ setShowDel, id, setData }) => {
   const AccessToken = localStorage.getItem("accessToken");
   const url = import.meta.env.VITE_calender_api_delEntry
 
   const handleDelete = async () => {
-    const response = await fetch(`${url}/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        authentication: `Bearer ${AccessToken}`,
-      },
-    });
+    setData((prev) => {
+      const data = [...prev].filter((e) => e._id !== id) 
+      localStorage.setItem("calData", JSON.stringify(data))
+      return data
+    })
     setShowDel(false);
   };
   return (

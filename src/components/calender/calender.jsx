@@ -18,12 +18,11 @@ const Calender = () => {
   const [showDel, setShowDel] = useState(false);
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
+  const [data, setData] = useState(JSON.parse(localStorage.getItem("calData")) || [])
 
   const [accessToken] = UseAccessToken();
 
-  const [data, error, loading] = UseFetch(
-    "http://localhost:8000/calander/data", [], [showAdd, showDel]
-  );
+
 
 
   const handleAddEvent = (dateClicked) => {
@@ -38,13 +37,14 @@ const Calender = () => {
 
   return (
     <div className="sm:px-5 px-3 w-full py-24">
-      {loading ? (
-        <Loading />
-      ) : (
+      
+
+    
         <div>
           {showDel && (
             <DelCalenderEvent
               setShowDel={setShowDel}
+              setData={setData}
               events={data}
               id={title}
             />
@@ -52,6 +52,7 @@ const Calender = () => {
           {showAdd && (
             <AddCalenderEvent
               setShowAdd={setShowAdd}
+              setData={setData}
               date={date}
             />
           )}
@@ -78,7 +79,7 @@ const Calender = () => {
             />
           </div>
         </div>
-      )}
+    
     </div>
   );
 };

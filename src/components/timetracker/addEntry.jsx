@@ -6,7 +6,7 @@ import { dateToStringDate } from "../hooks/time";
 import postData from "../hooks/postData";
 import UseFetch from "../hooks/useFetch";
 import Loading from "../../pages/loading";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
 //
 const addEntry = ({
@@ -23,38 +23,36 @@ const addEntry = ({
   const [project, setProject] = useState("");
   const [count, setCount] = useState(0);
   const [isOn, setIsOn] = useState(false);
+
+  const [inProgress, setInProgress] = useState(
+    JSON.parse(localStorage.getItem("inProgress")) || null
+  );
+
   const timerRef1 = useRef(null);
   const inputRef1 = useRef(null);
-
-  const [inProgress, error, loading] = UseFetch(
-    "http://localhost:8000/timetracker/data/inprogress",
-    [],
-    [ reRun]
-  );
 
   const setShouldChange = () => {
     null;
   };
+  useEffect(() => {
+    setInProgress(JSON.parse(localStorage.getItem("inProgress")) || null);
+  }, [reRun]);
 
   useEffect(() => {
-    if (!loading && inProgress !== null ) {
-      if (inProgress.inProgress) {
-          inputRef1.current.value = inProgress.title;
-          setProject(inProgress.project);
-          setTags(inProgress.tags);
-          setIsOn(true)
-          const secondsPassed = (Date.now() - inProgress.startTime) / 1000;
-          setCount(secondsPassed);
-          startClock();
-          return;
-      }
+    if (inProgress) {
+      inputRef1.current.value = inProgress.title;
+      setProject(inProgress.project);
+      setTags(inProgress.tags);
+      const secondsPassed = (Date.now() - inProgress.startTime) / 1000;
+      setCount(secondsPassed);
+      startClock();
+      return;
     }
   }, [inProgress]);
 
-
   const startClock = () => {
-    if (!isOn) {
-      setIsOn(true)
+    if (!isOn && !timerRef1.current) {
+      setIsOn(true);
       timerRef1.current = setInterval(
         () => setCount((prevCount) => prevCount + 1),
         1000
@@ -69,6 +67,7 @@ const addEntry = ({
     inputRef1.current.value = "";
     setProject("");
     setTags([]);
+    timerRef1.current = null
     addEntry();
   };
 
@@ -81,20 +80,14 @@ const addEntry = ({
       tags: inProgress.tags,
       startTime: inProgress.startTime,
       endTime: Date.now(),
+      _id: inProgress._id
     };
-    const response = await postData(
-      "http://localhost:8000/timetracker/data",
-      entryToAdd
-    );
-    const resJson = await response.json();
-
-    if (response.status === 201) {
-      const resp = await postData(
-        "http://localhost:8000/timetracker/data/clear/progress",
-        {}
-      );
-      setReRun((prev) => !prev);
-    }
+    setEntries((prev) => {
+      localStorage.setItem("data", JSON.stringify([entryToAdd, ...prev]));
+      return [ ...prev, entryToAdd];
+    });
+    localStorage.removeItem("inProgress");
+    setReRun((prev) => !prev);
   };
 
   const addInProgressEntry = async () => {
@@ -104,12 +97,9 @@ const addEntry = ({
       tags: tags || [],
       startTime: Date.now(),
       inProgress: true,
+      _id: Math.random()
     };
-    const response = await postData(
-      "http://localhost:8000/timetracker/data/progress",
-      newEntry
-    );
-    // navigate("/", { replace: true });
+    localStorage.setItem("inProgress", JSON.stringify(newEntry));
     setReRun((prev) => {
       return !prev;
     });

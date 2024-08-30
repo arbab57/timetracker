@@ -8,6 +8,7 @@ const dayEntries = ({
   tagSuggest,
   setTagSuggest,
   setReRun,
+  setData
 }) => {
   let totalTime = 0;
   for (let i = 0; i < allEntriesInDay.entries.length; i++) {
@@ -33,6 +34,7 @@ const dayEntries = ({
               setTagSuggest={setTagSuggest}
               setReRun={setReRun}
               key={index}
+              setData={setData}
             />
           );
         })}

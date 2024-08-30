@@ -5,31 +5,28 @@ import UseAccessToken from "../hooks/useAccessToken";
 import UseFetch from "../hooks/useFetch";
 
 const Timetracker = ({ isSideOpen }) => {
-  const [entries, setEntries] = useState([]);
-  const [accessToken] = UseAccessToken();
+  const [data, setData] = useState(JSON.parse(localStorage.getItem("data")) || []);
   const [projects, setProjects] = useState([]);
   const [tagSuggest, setTagSuggest] = useState([]);
   const [inProgressEntry, setInProgressEntry] = useState(null);
   const [reRun, setReRun] = useState(false);
   const timeTrackerAPI = import.meta.env.VITE_timeTracker_api;
 
-  const [data, error, loading] = UseFetch(timeTrackerAPI, [], [reRun]);
-
 
   useEffect(() => {
-    if (!loading) {
-      for (let i = 0; i < data.data.length; i++) {
+    if (data) {
+      for (let i = 0; i < data.length; i++) {
         if (
-          data.data[i].project === "" ||
-          data.data[i].project === undefined ||
-          projects.includes(data.data[i].project)
+          data[i].project === "" ||
+          data[i].project === undefined ||
+          projects.includes(data[i].project)
         ) {
           continue;
         }
-        projects.push(data.data[i].project);
+        projects.push(data[i].project);
       }
 
-      const newTags = data.data.flatMap((entry) => {
+      const newTags = data.flatMap((entry) => {
         return entry.tags;
       });
 
@@ -40,7 +37,7 @@ const Timetracker = ({ isSideOpen }) => {
         tagSuggest.push(newTags[i]);
       }
     }
-  }, [data]);
+  }, []);
 
 
   return (
@@ -49,21 +46,22 @@ const Timetracker = ({ isSideOpen }) => {
         projects={projects}
         tagSuggest={tagSuggest}
         setTagSuggest={setTagSuggest}
-        setEntries={setEntries}
-        entries={data.data}
+        setEntries={setData}
+        entries={data ? data : []}
         inProgressEntry={inProgressEntry}
         setInProgressEntry={setInProgressEntry}
-        loading={loading}
         setReRun={setReRun}
         reRun={reRun}
       />
       <Entries
         isSideOpen={isSideOpen}
-        entries={data.data ? data.data : []}
+        entries={data ? data : []}
         projects={projects}
         tagSuggest={tagSuggest}
         setTagSuggest={setTagSuggest}
         setReRun={setReRun}
+        setData={setData}
+
         
       />
       <div className=""></div>

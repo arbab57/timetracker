@@ -8,16 +8,23 @@ import { dateToStringDate } from "../hooks/time";
 import putData from "../hooks/putData";
 import postData from "../hooks/postData";
 import DelEntry from "./delEntry";
-import Toast from "../general/toast"
+import Toast from "../general/toast";
 import { useNavigate } from "react-router-dom";
 
-const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
+const entry = ({
+  entry,
+  projects,
+  tagSuggest,
+  setTagSuggest,
+  setReRun,
+  setData,
+}) => {
   const [project, setProject] = useState(entry.project ? entry.project : "");
   const [tags, setTags] = useState(entry.tags.length > 0 ? entry.tags : []);
   const [title, setTitle] = useState(entry.title);
   const [shouldChange, setShouldChange] = useState(false);
   const [showDel, setShowDel] = useState(false);
-  const [showToast, setShowToast] = useState(false)
+  const [showToast, setShowToast] = useState(false);
   const navigateTo = useNavigate();
 
   const titleRef = useRef(null);
@@ -27,9 +34,8 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
   useEffect(() => {
     setProject(entry.project ? entry.project : "");
     setTags(entry.tags.length > 0 ? entry.tags : []);
-    setTitle(entry.title)
+    setTitle(entry.title);
   }, [entry.project, entry.tags, entry.title]);
-
 
   useEffect(() => {
     if (shouldChange) {
@@ -59,35 +65,39 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
         oldEntry.endTime !== newEntry.endTime
       );
     };
-  if(hasChanged(entry, updatedEntry)){
-    const body = { updatedEntry: updatedEntry, entryId: entry._id };
+    if (hasChanged(entry, updatedEntry)) {
+      const body = { updatedEntry: updatedEntry, entryId: entry._id };
 
-    const response = await putData(
-      "http://localhost:8000/timetracker/data",
-      body
-    );
-    if (response.status === 201) {
-      setReRun((prev) => !prev);
-      setShowToast(true)
+      setData((prev) => {
+        const data = [...prev]
+        const index = data.findIndex((e) => e._id === entry._id)
+        if(index !== -1) {
+          data[index] = updatedEntry
+          localStorage.setItem("data", JSON.stringify(data))
+          return data
+        }
+        return [...prev]
+
+      })
+
+        setReRun((prev) => !prev);
+        setShowToast(true);
+      
     }
-  }
   };
 
   const handleDelete = async () => {
     try {
-      const id = entry._id;
-      const AccessToken = localStorage.getItem("accessToken");
-      const response = await fetch("http://localhost:8000/timetracker/data", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          authentication: `Bearer ${AccessToken}`,
-        },
-        body: JSON.stringify({ id: id }),
+      const id = entry?._id;
+      setData((prev) => {
+        localStorage.setItem(
+          "data",
+          JSON.stringify([...prev].filter((e) => e._id !== entry._id))
+        );
+
+        return [...prev].filter((e) => e._id !== entry._id);
       });
-      if (response.status === 200) {
-        setReRun((prev) => !prev);
-      }
+      setReRun((prev) => !prev);
     } catch (error) {
       console.log(error.message);
     }
@@ -100,31 +110,33 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
       tags: entry.tags,
       startTime: Date.now(),
       inProgress: true,
+      _id: entry._id,
     };
-    console.log(newEntry)
-    const response = await postData(
-      "http://localhost:8000/timetracker/data/progress",
-      newEntry
-    );
-    if(response.status === 200) {
-      setReRun((prev) => !prev)
+    const inProgress = JSON.parse(localStorage.getItem("inProgress"));
+    if (!inProgress) {
+      localStorage.setItem("inProgress", JSON.stringify(newEntry));
+      setReRun((prev) => !prev);
     }
   };
 
   return (
     <div className="font-roboto flex xl:flex-row lg:justify-between flex-col lg:gap-0 py-1 sm:px-6 px-3  bg-white w-full border-b-2 border-gray-300 relative">
-          {showToast && (
-        <Toast message={"Entry updated"} severity="success" onClose={setShowToast} />
+      {showToast && (
+        <Toast
+          message={"Entry updated"}
+          severity="success"
+          onClose={setShowToast}
+        />
       )}
       <div className="flex items-center xl:justify-start justify-between gap-2 xl:w-1/2 h-11">
         <input
           ref={titleRef}
           onChange={(e) => {
-              setTitle(e.target.value)
+            setTitle(e.target.value);
           }}
           onBlur={(e) => {
             setShouldChange(true);
-            setTitle(e.target.value)
+            setTitle(e.target.value);
           }}
           placeholder="Add description"
           value={title}
@@ -151,15 +163,10 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
           />
 
           <div className="flex sm:gap-4 gap-1 items-center border-l border-gray-200 h-12 lg:px-3">
-           <p>
-           {convertTimestampToTime(entry.startTime)}
-           </p>
+            <p>{convertTimestampToTime(entry.startTime)}</p>
 
             <span>-</span>
-          <p>
-          {convertTimestampToTime(entry.endTime)}
-          </p>
-           
+            <p>{convertTimestampToTime(entry.endTime)}</p>
           </div>
         </div>
 
@@ -168,7 +175,10 @@ const entry = ({ entry, projects, tagSuggest, setTagSuggest, setReRun }) => {
             {convertMsToTime(entry.endTime - entry.startTime)}
           </p>
           <div className="flex">
-            <button onClick={() => addInProgressEntry()} className="text-xl lg:text-gray-500 text-white hover:text-white h-12 w-16 flex items-center justify-center hover:bg-blue-500 p-3 lg:bg-transparent bg-blue-500  transition border-r sm:border-l border-gray-200">
+            <button
+              onClick={() => addInProgressEntry()}
+              className="text-xl lg:text-gray-500 text-white hover:text-white h-12 w-16 flex items-center justify-center hover:bg-blue-500 p-3 lg:bg-transparent bg-blue-500  transition border-r sm:border-l border-gray-200"
+            >
               <FaPlay />
             </button>
             <div

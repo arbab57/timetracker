@@ -8,6 +8,7 @@ const entries = ({
   tagSuggest,
   setTagSuggest,
   setReRun,
+  setData
 }) => {
 
 
@@ -46,6 +47,7 @@ const entries = ({
             setTagSuggest={setTagSuggest}
             setReRun={setReRun}
             key={index}
+            setData={setData}
           />
         );
       })}

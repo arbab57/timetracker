@@ -1,27 +1,23 @@
 import { useRef, useState } from "react";
-const AddCalenderEvent = ({ setShowAdd, date, setEvents }) => {
+const AddCalenderEvent = ({ setShowAdd, date, setEvents, setData }) => {
   const nameRef = useRef(null);
   const colorRef = useRef(null);
   const url = import.meta.env.VITE_calender_api_addEntry
 
   const handleSubmit = async () => {
   try {
-    const AccessToken = localStorage.getItem("accessToken");
     if (nameRef.current.value !== "") {
-
       const newEntry = {
         title: nameRef.current.value,
         date: date,
         color: colorRef.current.value,
+        _id: Math.random()
       };
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authentication: `Bearer ${AccessToken}`,
-        },
-        body: JSON.stringify(newEntry),
-      });
+      setData((prev) => {
+        
+        localStorage.setItem("calData", JSON.stringify([...prev, newEntry]))
+        return [...prev, newEntry]
+      })
       setShowAdd(false);
 
     }
