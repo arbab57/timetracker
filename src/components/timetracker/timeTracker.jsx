@@ -14,6 +14,11 @@ const Timetracker = ({ isSideOpen }) => {
 
 
   useEffect(() => {
+    setData(JSON.parse(localStorage.getItem("data")) || [])
+
+  }, [])
+
+  useEffect(() => {
     if (data) {
       for (let i = 0; i < data.length; i++) {
         if (
@@ -37,7 +42,7 @@ const Timetracker = ({ isSideOpen }) => {
         tagSuggest.push(newTags[i]);
       }
     }
-  }, []);
+  }, [data]);
 
 
   return (
