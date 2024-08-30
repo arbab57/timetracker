@@ -20,7 +20,6 @@ const Calender = () => {
   const [title, setTitle] = useState("");
   const [data, setData] = useState(JSON.parse(localStorage.getItem("calData")) || [])
 
-  const [accessToken] = UseAccessToken();
 
 
 
