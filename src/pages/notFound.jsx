@@ -4,7 +4,6 @@ import UseAccessToken from "../components/hooks/useAccessToken";
 
 const NotFound = () => {
   const navigate = useNavigate();
-  const accessToken = UseAccessToken();
 
   return (
     <div className="flex items-center justify-center h-screen w-full bg-gray-100">
